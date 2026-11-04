@@ -1,9 +1,27 @@
+Aquí tienes la versión de **¡DESPEDIDO!** rediseñada específicamente para la pantalla de tu **iPhone 11** (`414 × 896 px`, iOS Safari):
+
+### 📱 Mejoras específicas para iPhone 11 incluidas:
+1. **Todo cabe en una sola pantalla sin hacer scroll**:
+   * En la **Fase 1 (Despedir)**, los 4 jefes de departamento aparecen en una **cuadrícula 2×2** compacta para que veas y pulses los 4 con el pulgar de un vistazo.
+   * La barra de progreso de los **3 pasos (`1. Despido` → `2. Causa` → `3. Remedio`)** se mantiene siempre en una sola fila horizontal.
+2. **Soporte nativo iOS / Notch / Barra inferior**:
+   * Incluye `viewport-fit=cover` y `env(safe-area-inset-top / bottom)` para respetar el *notch* superior y la barra inferior del iPhone 11.
+   * Incluye `touch-action: manipulation` y bloqueo de zoom accidental al pulsar rápido con el dedo.
+3. **Notificación flotante inferior**: Cuando aciertas o fallas, el mensaje de Don Rufino aparece en un *banner* flotante en la parte inferior para que no desplace ni mueva los botones de sitio.
+
+---
+
+### Código completo optimizado para iPhone 11 (`index.html`)
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>¡DESPEDIDO! - El Simulador de Ciberseguridad Corporativa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>¡DESPEDIDO! - Edición iPhone</title>
   <style>
     :root {
       --bg-dark: #0f0e17;
@@ -12,12 +30,11 @@
       --accent-red: #ff2a5f;
       --accent-yellow: #ffbe0b;
       --accent-green: #00f5d4;
-      --accent-blue: #3a86ff;
       --accent-purple: #8338ec;
       --text-main: #fffffe;
       --text-muted: #a7a9be;
-      --border-brutal: 3px solid #000;
-      --shadow-brutal: 6px 6px 0px #000;
+      --border-brutal: 2.5px solid #000;
+      --shadow-brutal: 4px 4px 0px #000;
     }
 
     * {
@@ -25,175 +42,201 @@
       margin: 0;
       padding: 0;
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    html, body {
+      width: 100%;
+      min-height: 100dvh;
       background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(255, 42, 95, 0.12) 0%, transparent 35%),
-        radial-gradient(circle at 85% 80%, rgba(131, 56, 236, 0.14) 0%, transparent 40%);
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(255, 42, 95, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(131, 56, 236, 0.15) 0%, transparent 40%);
       color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
       overflow-x: hidden;
     }
 
-    .container {
+    /* Contenedor calibrado para iPhone 11 (414px de ancho) */
+    .app-shell {
       width: 100%;
-      max-width: 960px;
+      max-width: 430px;
+      min-height: 100dvh;
       margin: 0 auto;
+      padding: calc(env(safe-area-inset-top, 10px) + 8px) 12px calc(env(safe-area-inset-bottom, 14px) + 12px) 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    /* TOP BAR */
+    /* TOPBAR COMPACTA PARA MÓVIL */
     .topbar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
       background: var(--bg-card);
       border: var(--border-brutal);
       box-shadow: var(--shadow-brutal);
       border-radius: 14px;
-      padding: 14px 20px;
-      margin-bottom: 18px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .topbar-row1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
 
     .brand-logo {
-      font-size: 2rem;
+      font-size: 1.35rem;
       background: var(--accent-red);
       border: 2px solid #000;
-      box-shadow: 3px 3px 0 #000;
-      border-radius: 10px;
-      width: 48px;
-      height: 48px;
+      box-shadow: 2px 2px 0 #000;
+      border-radius: 8px;
+      width: 34px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: rotate(-6deg);
+      transform: rotate(-5deg);
     }
 
     .brand-title h1 {
-      font-size: 1.5rem;
+      font-size: 1.15rem;
       font-weight: 900;
-      letter-spacing: 1px;
       color: var(--accent-yellow);
-      text-shadow: 2px 2px 0 #000;
-      text-transform: uppercase;
+      text-shadow: 1.5px 1.5px 0 #000;
+      letter-spacing: 0.5px;
+      line-height: 1;
     }
 
     .brand-title p {
-      font-size: 0.78rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    .stats-bar {
+    .top-actions {
       display: flex;
+      gap: 6px;
+    }
+
+    .btn-icon {
+      background: var(--bg-panel);
+      color: var(--text-main);
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0 #000;
+      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn-icon:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0 #000;
+    }
+
+    .topbar-row2 {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      gap: 6px;
       align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
     }
 
     .stat-pill {
       background: var(--bg-panel);
       border: 2px solid #000;
-      box-shadow: 3px 3px 0 #000;
-      border-radius: 10px;
-      padding: 6px 12px;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 0.76rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 0.92rem;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .stat-pill.lives-pill {
+      justify-content: flex-end;
+      background: #151324;
     }
 
     .lives-display {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
+      font-size: 0.92rem;
+      letter-spacing: 1px;
     }
 
-    .btn-util {
-      background: var(--bg-panel);
-      color: var(--text-main);
-      border: 2px solid #000;
-      box-shadow: 3px 3px 0 #000;
-      border-radius: 8px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.85rem;
-      transition: transform 0.1s;
-    }
-
-    .btn-util:hover {
-      background: var(--accent-purple);
-      transform: translate(-1px, -1px);
-    }
-
-    .btn-util:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0 #000;
-    }
-
-    /* MAIN CARD */
+    /* CAJA PRINCIPAL */
     .game-box {
       background: var(--bg-card);
       border: var(--border-brutal);
       box-shadow: var(--shadow-brutal);
-      border-radius: 18px;
-      padding: 24px;
+      border-radius: 16px;
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       position: relative;
-      overflow: hidden;
     }
 
-    /* BOSS DIALOGUE */
+    .screen {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    /* JEFE COMPACTO */
     .boss-header {
       display: flex;
-      gap: 16px;
-      align-items: flex-start;
+      gap: 10px;
+      align-items: center;
       background: linear-gradient(135deg, #2b193d 0%, #1c1936 100%);
-      border: var(--border-brutal);
-      box-shadow: 4px 4px 0 #000;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 20px;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 #000;
+      border-radius: 12px;
+      padding: 9px 10px;
+      margin-bottom: 9px;
     }
 
     .boss-avatar {
-      font-size: 3.2rem;
+      font-size: 2rem;
       background: var(--accent-yellow);
-      border: 3px solid #000;
-      border-radius: 14px;
-      min-width: 74px;
-      height: 74px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      min-width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 3px 3px 0 #000;
+      box-shadow: 2px 2px 0 #000;
       position: relative;
+      flex-shrink: 0;
     }
 
     .boss-badge {
       position: absolute;
-      bottom: -8px;
+      bottom: -6px;
       background: var(--accent-red);
       color: #fff;
-      font-size: 0.65rem;
+      font-size: 0.52rem;
       font-weight: 900;
-      padding: 2px 6px;
-      border: 2px solid #000;
-      border-radius: 6px;
-      text-transform: uppercase;
+      padding: 1px 4px;
+      border: 1.5px solid #000;
+      border-radius: 4px;
     }
 
     .boss-speech {
@@ -201,29 +244,27 @@
     }
 
     .boss-name {
-      font-size: 0.82rem;
+      font-size: 0.68rem;
       font-weight: 900;
       text-transform: uppercase;
       color: var(--accent-yellow);
-      margin-bottom: 4px;
-      letter-spacing: 0.5px;
+      margin-bottom: 2px;
     }
 
     .boss-quote {
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-style: italic;
       color: #f1f1f1;
-      line-height: 1.45;
+      line-height: 1.28;
     }
 
-    /* INCIDENT ALERT */
+    /* TARJETA DEL INCIDENTE */
     .incident-card {
       background: #12111d;
-      border: 3px dashed var(--accent-red);
-      border-radius: 14px;
-      padding: 18px 20px;
-      margin-bottom: 22px;
-      position: relative;
+      border: 2px dashed var(--accent-red);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 9px;
     }
 
     .incident-tag {
@@ -231,48 +272,49 @@
       background: var(--accent-red);
       color: #fff;
       font-weight: 900;
-      font-size: 0.75rem;
-      padding: 3px 10px;
-      border-radius: 6px;
-      border: 2px solid #000;
+      font-size: 0.64rem;
+      padding: 2px 7px;
+      border-radius: 5px;
+      border: 1.5px solid #000;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .incident-title {
-      font-size: 1.25rem;
+      font-size: 0.96rem;
       font-weight: 800;
       color: #fff;
-      line-height: 1.4;
+      line-height: 1.3;
     }
 
-    /* STEP PROGRESS */
+    /* BARRA DE 3 PASOS EN 1 FILA */
     .step-tracker {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 22px;
+      gap: 6px;
+      margin-bottom: 10px;
     }
 
     .step-item {
       background: var(--bg-panel);
       border: 2px solid #000;
-      border-radius: 10px;
-      padding: 10px;
+      border-radius: 8px;
+      padding: 6px 4px;
       text-align: center;
-      font-weight: 800;
-      font-size: 0.85rem;
+      font-weight: 900;
+      font-size: 0.68rem;
       color: var(--text-muted);
-      opacity: 0.6;
-      transition: all 0.2s;
+      opacity: 0.55;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .step-item.active {
       background: var(--accent-yellow);
       color: #000;
       opacity: 1;
-      box-shadow: 4px 4px 0 #000;
-      transform: translateY(-2px);
+      box-shadow: 2px 2px 0 #000;
     }
 
     .step-item.done {
@@ -281,126 +323,126 @@
       opacity: 1;
     }
 
-    /* QUESTION AREA */
     .phase-title {
-      font-size: 1.15rem;
+      font-size: 0.84rem;
       font-weight: 900;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       color: var(--accent-green);
       text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      line-height: 1.25;
     }
 
-    /* EMPLOYEES GRID (PHASE 1) */
+    /* FASE 1: CUADRÍCULA 2x2 EN IPHONE 11 */
     .employees-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      flex: 1;
     }
 
     .emp-card {
       background: var(--bg-panel);
-      border: var(--border-brutal);
-      box-shadow: 4px 4px 0 #000;
-      border-radius: 14px;
-      padding: 16px;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 #000;
+      border-radius: 12px;
+      padding: 10px 8px;
       cursor: pointer;
-      transition: all 0.15s;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      position: relative;
+      justify-content: space-between;
+      transition: transform 0.08s;
     }
 
-    .emp-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 7px 7px 0 #000;
-      background: #2f2b4a;
-      border-color: var(--accent-red);
+    .emp-card:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #000;
+      background: #322d52;
     }
 
     .emp-avatar {
-      font-size: 2.8rem;
-      margin-bottom: 8px;
+      font-size: 1.85rem;
       background: #151324;
-      width: 68px;
-      height: 68px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       border: 2px solid #000;
+      margin-bottom: 4px;
     }
 
     .emp-dept {
-      font-size: 1.05rem;
+      font-size: 0.82rem;
       font-weight: 900;
       color: var(--accent-yellow);
-      margin-bottom: 4px;
       text-transform: uppercase;
+      margin-bottom: 2px;
     }
 
     .emp-name {
-      font-size: 0.85rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      line-height: 1.15;
     }
 
     .emp-excuse {
-      font-size: 0.76rem;
+      font-size: 0.66rem;
       color: var(--text-muted);
       font-style: italic;
-      margin-bottom: 12px;
-      line-height: 1.3;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .fire-badge {
-      margin-top: auto;
       background: var(--accent-red);
       color: #fff;
       font-weight: 900;
-      font-size: 0.78rem;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 2px solid #000;
+      font-size: 0.7rem;
+      padding: 6px 8px;
+      border-radius: 7px;
+      border: 1.5px solid #000;
       text-transform: uppercase;
       width: 100%;
       box-shadow: 2px 2px 0 #000;
     }
 
-    /* OPTIONS LIST (PHASE 2 & 3) */
+    /* FASES 2 Y 3: BOTONES TÁCTILES */
     .options-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .option-btn {
       background: var(--bg-panel);
       color: var(--text-main);
-      border: var(--border-brutal);
-      box-shadow: 4px 4px 0 #000;
-      border-radius: 12px;
-      padding: 15px 18px;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 #000;
+      border-radius: 11px;
+      padding: 11px 12px;
       text-align: left;
-      font-size: 0.98rem;
+      font-size: 0.84rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.12s;
       display: flex;
       align-items: center;
-      gap: 14px;
-      line-height: 1.35;
+      gap: 10px;
+      line-height: 1.28;
     }
 
-    .option-btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 #000;
-      background: #302c4d;
+    .option-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #000;
+      background: #332e54;
       border-color: var(--accent-yellow);
     }
 
@@ -408,149 +450,166 @@
       background: var(--accent-purple);
       color: #fff;
       font-weight: 900;
-      min-width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      border: 2px solid #000;
+      min-width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      border: 1.5px solid #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.95rem;
+      font-size: 0.82rem;
+      flex-shrink: 0;
     }
 
-    /* FEEDBACK TOAST */
-    .feedback-box {
-      margin-top: 18px;
-      padding: 16px;
+    /* TOAST FLOTANTE INFERIOR PARA NO DESPLAZAR LA PANTALLA */
+    .feedback-toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(env(safe-area-inset-bottom, 12px) + 12px);
+      transform: translateX(-50%) translateY(150%);
+      width: calc(100% - 24px);
+      max-width: 406px;
+      padding: 12px 14px;
       border-radius: 12px;
-      border: var(--border-brutal);
-      box-shadow: 4px 4px 0 #000;
+      border: 2.5px solid #000;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.75);
+      font-size: 0.82rem;
       font-weight: 700;
-      display: none;
-      animation: popIn 0.2s ease-out;
+      line-height: 1.3;
+      z-index: 950;
+      transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
     }
 
-    .feedback-box.correct {
-      background: #0a362e;
+    .feedback-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .feedback-toast.correct {
+      background: #09382f;
       border-color: var(--accent-green);
-      color: #b8fff1;
+      color: #c4fff4;
     }
 
-    .feedback-box.wrong {
-      background: #421122;
+    .feedback-toast.wrong {
+      background: #4a1023;
       border-color: var(--accent-red);
-      color: #ffd0dc;
+      color: #ffd5e0;
     }
 
-    /* START / END SCREENS */
-    .screen {
-      display: none;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
+    /* PANTALLAS INICIO Y FIN */
     .hero-banner {
       text-align: center;
-      padding: 20px 10px;
+      padding: 8px 4px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
     }
 
     .hero-stamp {
       display: inline-block;
-      font-size: 3rem;
+      align-self: center;
+      font-size: 1.75rem;
       font-weight: 900;
       color: var(--accent-red);
-      border: 5px solid var(--accent-red);
-      padding: 8px 24px;
-      border-radius: 12px;
-      transform: rotate(-4deg);
+      border: 4px solid var(--accent-red);
+      padding: 6px 16px;
+      border-radius: 10px;
+      transform: rotate(-3deg);
       text-transform: uppercase;
-      box-shadow: 6px 6px 0 #000;
+      box-shadow: 4px 4px 0 #000;
       background: #1a0c14;
-      margin-bottom: 18px;
-      letter-spacing: 2px;
+      margin-bottom: 10px;
     }
 
     .hero-subtitle {
-      font-size: 1.15rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 24px auto;
-      line-height: 1.5;
+      line-height: 1.38;
+      margin-bottom: 12px;
     }
 
     .rules-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 28px;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
       text-align: left;
     }
 
     .rule-card {
       background: var(--bg-panel);
       border: 2px solid #000;
-      box-shadow: 4px 4px 0 #000;
-      border-radius: 12px;
-      padding: 14px;
+      box-shadow: 2px 2px 0 #000;
+      border-radius: 10px;
+      padding: 9px;
     }
 
     .rule-card h3 {
       color: var(--accent-yellow);
-      font-size: 0.95rem;
-      margin-bottom: 6px;
+      font-size: 0.78rem;
+      margin-bottom: 4px;
     }
 
     .rule-card p {
-      font-size: 0.85rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
-      line-height: 1.35;
+      line-height: 1.25;
     }
 
     .btn-primary {
       background: var(--accent-red);
       color: #fff;
-      font-size: 1.2rem;
+      font-size: 0.95rem;
       font-weight: 900;
-      padding: 14px 32px;
+      padding: 13px 16px;
       border: var(--border-brutal);
       box-shadow: var(--shadow-brutal);
       border-radius: 12px;
       cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: transform 0.1s;
-    }
-
-    .btn-primary:hover {
-      background: #ff4777;
-      transform: translate(-2px, -2px);
-      box-shadow: 8px 8px 0 #000;
+      width: 100%;
     }
 
     .btn-primary:active {
-      transform: translate(3px, 3px);
-      box-shadow: 2px 2px 0 #000;
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #000;
     }
 
-    /* STAMP OVERLAY ANIMATION */
+    .btn-secondary {
+      background: var(--bg-panel);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 11px 16px;
+      border: var(--border-brutal);
+      box-shadow: 3px 3px 0 #000;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    /* SELLO ANIMADO ¡A LA CALLE! */
     .fired-stamp-overlay {
       position: fixed;
-      top: 50%;
+      top: 45%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(-12deg) scale(0);
       background: rgba(255, 42, 95, 0.96);
       color: #fff;
-      border: 6px solid #000;
-      box-shadow: 10px 10px 0 #000;
-      padding: 18px 36px;
-      font-size: 2.6rem;
+      border: 5px solid #000;
+      box-shadow: 8px 8px 0 #000;
+      padding: 14px 22px;
+      font-size: 1.9rem;
       font-weight: 900;
-      border-radius: 16px;
+      border-radius: 14px;
       z-index: 1000;
       pointer-events: none;
       text-align: center;
+      width: 88%;
+      max-width: 340px;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -560,21 +619,21 @@
 
     .fired-stamp-overlay span {
       display: block;
-      font-size: 1rem;
+      font-size: 0.82rem;
       color: var(--accent-yellow);
       margin-top: 4px;
     }
 
-    /* MODAL CHULETA TEORIA */
+    /* MODAL CHULETA */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 900;
-      padding: 16px;
+      z-index: 980;
+      padding: 14px;
     }
 
     .modal-backdrop.open {
@@ -586,244 +645,216 @@
       border: var(--border-brutal);
       box-shadow: var(--shadow-brutal);
       border-radius: 16px;
-      max-width: 720px;
+      max-width: 406px;
       width: 100%;
-      max-height: 85vh;
+      max-height: 82dvh;
       overflow-y: auto;
-      padding: 24px;
+      padding: 16px;
+      -webkit-overflow-scrolling: touch;
     }
 
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
       border-bottom: 2px solid #333;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
     }
 
-    .theory-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    @media (max-width: 640px) {
-      .theory-grid {
-        grid-template-columns: 1fr;
-      }
-      .step-tracker {
-        grid-template-columns: 1fr;
-      }
-      .boss-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.95); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    .theory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-8px); }
-      40%, 80% { transform: translateX(8px); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
     }
 
     .shake {
-      animation: shake 0.35s ease-in-out;
+      animation: shake 0.32s ease-in-out;
     }
   </style>
 </head>
 <body>
 
+  <!-- SELLO DE DESPIDO -->
   <div class="fired-stamp-overlay" id="firedStamp">
     ¡A LA CALLE!
     <span id="firedSubtext">FIRMADO: DON RUFINO</span>
   </div>
 
-  <!-- MODAL CHULETA -->
+  <!-- TOAST FLOTANTE DE FEEDBACK -->
+  <div class="feedback-toast" id="feedbackToast"></div>
+
+  <!-- MODAL CHULETA TEORÍA -->
   <div class="modal-backdrop" id="theoryModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 style="color: var(--accent-yellow);">📓 La Servilleta de Don Rufino (Chuleta Tema 1)</h2>
-        <button class="btn-util" onclick="toggleTheory()">✖ Cerrar</button>
+        <h2 style="color: var(--accent-yellow); font-size: 1rem;">📓 La Servilleta de Don Rufino</h2>
+        <button class="btn-icon" onclick="toggleTheory()">✖ Cerrar</button>
       </div>
-      <p style="color: var(--text-muted); margin-bottom: 14px; font-size: 0.9rem;">
-        "A ver, becario, me apunté esto en una servilleta del bar para saber a quién echar cuando algo pete:"
-      </p>
-      <div class="theory-grid">
+      <div class="theory-list">
         <div class="rule-card">
           <h3>🕵️‍♂️ 1. CONFIDENCIALIDAD</h3>
-          <p><strong>¿Qué es?</strong> Solo las personas o sistemas autorizados pueden leer/acceder a la información privilegiada. Todo acceso queda en la bitácora.<br><br>
-          <strong>Cuándo despedirlo:</strong> Si alguien espía, roba secretos, lee memoria ajena por canales laterales (tiempo de CPU, consumo, sonido, ondas), o intercepta datos sin cifrar.</p>
+          <p>Solo usuarios/sistemas autorizados leen datos. <strong>Despídelo si:</strong> espían por canales laterales (tiempo CPU, consumo, sonido, ondas), vuelcan RAM (DMA/Cold Boot/Meltdown) o roban discos sin cifrar.</p>
         </div>
         <div class="rule-card">
           <h3>🛡️ 2. INTEGRIDAD</h3>
-          <p><strong>¿Qué es?</strong> Asegura que la información (datos, caché, memoria, registros, bitácoras) NO ha sido modificada ni alterada sin autorización.<br><br>
-          <strong>Cuándo despedirlo:</strong> Si se modifican datos en caché, un pico de voltaje cambia bits (bit-flip), hacen Rowhammer, desbordan búferes o alteran logs.</p>
+          <p>Los datos no se modifican sin permiso. <strong>Despídelo si:</strong> alteran la caché, un pico de voltaje cambia bits (bit-flip), hacen Rowhammer, desbordan búferes o borran las bitácoras (logs).</p>
         </div>
         <div class="rule-card">
           <h3>🔌 3. DISPONIBILIDAD</h3>
-          <p><strong>¿Qué es?</strong> Garantiza que el sistema y los datos estén operativos y accesibles en el momento en que los usuarios autorizados los requieran.<br><br>
-          <strong>Cuándo despedirlo:</strong> Si el chip se sobrecalienta, fallan los ventiladores, hay denegación de servicio (DoS), incendios, inundaciones o apagones sin SAI.</p>
+          <p>El sistema está activo cuando se necesita. <strong>Despídelo si:</strong> el chip se sobrecalienta, fallan ventiladores/SAI, hay DoS/DDoS, incendios, inundaciones o vandalismo físico.</p>
         </div>
         <div class="rule-card">
-          <h3>🪪 4. AUTENTIFICACIÓN (y Control de Acceso)</h3>
-          <p><strong>¿Qué es?</strong> Comprobación de identidad (lo que tienes: token, lo que eres: biometría, lo que sabes: contraseña), permisos de uso de recursos (autorización), firmas digitales de firmware y no repudio.<br><br>
-          <strong>Cuándo despedirlo:</strong> Si cargan firmware/microcódigo sin verificar firma, un usuario/VM salta permisos de memoria/hipervisor, entran con contraseñas débiles o un admin niega haber firmado algo.</p>
+          <h3>🪪 4. AUTENTIFICACIÓN</h3>
+          <p>Identidad (contraseña, token, biometría), permisos (autorización) y firmas (no repudio). <strong>Despídelo si:</strong> cargan firmware sin firma, un usuario/VM salta permisos o un admin niega haber autorizado algo.</p>
         </div>
-      </div>
-      <div class="rule-card" style="margin-bottom: 10px;">
-        <h3>🧠 Otros conceptos del Tema 1 que salen en las causas y remedios:</h3>
-        <p>
-          • <strong>Seguridad Física:</strong> Análisis de riesgos + Plan de contingencia. Protege personal y equipo (no bloquear salidas, restringir acceso, mantenimiento preventivo, facilitar acceso a mantenimiento).<br>
-          • <strong>Seguridad Lógica:</strong> Objetivos de la organización + Política de seguridad + Mecanismos de seguridad.<br>
-          • <strong>Antes de un incidente:</strong> Definir política, difundir por escrito plan de contingencia, dar capacitaciones, pruebas de riesgo.<br>
-          • <strong>Después/durante un incidente:</strong> Notificar apropiadamente, determinar cómo ocurrió, ajustar medidas y generar reporte en bitácora.<br>
-          • <strong>Amenaza vs Vulnerabilidad vs Riesgo:</strong> Amenaza = algo que puede causar daño. Vulnerabilidad = debilidad/falla del sistema. Riesgo = probabilidad de que una amenaza aproveche una vulnerabilidad.
-        </p>
+        <div class="rule-card">
+          <h3>🧠 Conceptos Clave Tema 1 UNIR</h3>
+          <p>
+            • <strong>Seguridad Física:</strong> Análisis de riesgos + Plan de contingencia (no bloquear salidas, restringir acceso, mantenimiento preventivo).<br>
+            • <strong>Antes del incidente:</strong> Política, difundir plan por escrito, capacitaciones y pruebas de riesgo.<br>
+            • <strong>Después del incidente:</strong> Notificar, determinar cómo ocurrió, ajustar medidas y reporte en bitácora.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <!-- TOPBAR -->
+  <div class="app-shell">
+    <!-- TOPBAR MÓVIL -->
     <header class="topbar">
-      <div class="brand">
-        <div class="brand-logo">🤬</div>
-        <div class="brand-title">
-          <h1>¡DESPEDIDO!</h1>
-          <p>CiberChiringuito S.L. — Gestión por Despido Improcedente</p>
+      <div class="topbar-row1">
+        <div class="brand">
+          <div class="brand-logo">🤬</div>
+          <div class="brand-title">
+            <h1>¡DESPEDIDO!</h1>
+            <p>CiberChiringuito S.L.</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="btn-icon" onclick="toggleTheory()">📓 Chuleta</button>
+          <button class="btn-icon" id="soundToggleBtn" onclick="toggleSound()">🔊</button>
         </div>
       </div>
-      <div class="stats-bar">
-        <div class="stat-pill" title="Situación actual">
-          <span>📁 Caso:</span>
-          <span id="caseCounter" style="color: var(--accent-yellow);">0 / 40</span>
+      <div class="topbar-row2">
+        <div class="stat-pill">
+          <span>📁</span>
+          <span id="caseCounter" style="color: var(--accent-yellow);">1/40</span>
         </div>
-        <div class="stat-pill" title="Despidos ejecutados">
-          <span>🥾 Despedidos:</span>
+        <div class="stat-pill">
+          <span>🥾</span>
           <span id="firedCounter" style="color: var(--accent-green);">0</span>
         </div>
-        <div class="stat-pill" title="Vidas antes de que la empresa quiebre">
-          <span>🏢 Vidas:</span>
+        <div class="stat-pill lives-pill">
           <span class="lives-display" id="livesDisplay">💼💼💼💼💼</span>
         </div>
-        <button class="btn-util" onclick="toggleTheory()">📓 Chuleta</button>
-        <button class="btn-util" id="soundToggleBtn" onclick="toggleSound()">🔊 Sonido</button>
       </div>
     </header>
 
-    <!-- MAIN GAME BOX -->
+    <!-- CAJA DE JUEGO -->
     <main class="game-box" id="gameBox">
 
-      <!-- START SCREEN -->
+      <!-- PANTALLA DE INICIO -->
       <section class="screen active" id="startScreen">
         <div class="hero-banner">
-          <div class="hero-stamp">¡ESTÁS DESPEDIDO!</div>
-          <h2 style="font-size: 1.9rem; margin-bottom: 12px; color: var(--accent-yellow);">
-            Eres Don Rufino, CEO de CiberChiringuito S.L.
-          </h2>
-          <p class="hero-subtitle">
-            No sabes la diferencia entre un kernel, una croqueta y un firewall, pero tu cuñado te ha puesto al mando de una empresa tecnológica. Van a ocurrir <strong>40 desastres de seguridad en arquitectura de computadores</strong>. ¡Tu misión es echar al culpable y parchear el marrón antes de que la empresa quiebre!
-          </p>
+          <div>
+            <div class="hero-stamp">¡DESPEDIDO!</div>
+            <h2 style="font-size: 1.25rem; margin-bottom: 6px; color: var(--accent-yellow);">
+              Simulador de Jefe Gamberro
+            </h2>
+            <p class="hero-subtitle">
+              Eres <strong>Don Rufino</strong>, CEO de CiberChiringuito S.L. No sabes informática, pero tienes <strong>40 marrones de seguridad</strong> y <strong>5 vidas (💼)</strong> antes de quebrar.
+            </p>
 
-          <div class="rules-grid">
-            <div class="rule-card">
-              <h3>1️⃣ PASO 1: ¡A LA CALLE!</h3>
-              <p>Adivina qué propiedad falló (<strong>Confidencialidad, Integridad, Disponibilidad o Autentificación</strong>) y despide sin piedad al jefe de ese departamento.</p>
-            </div>
-            <div class="rule-card">
-              <h3>2️⃣ PASO 2: LA EXCUSA</h3>
-              <p>Descubre cuál ha sido la <strong>Posible Causa</strong> real del desastre entre las chapuzas técnicas del edificio.</p>
-            </div>
-            <div class="rule-card">
-              <h3>3️⃣ PASO 3: EL PARCHE</h3>
-              <p>Elige el <strong>Remedio</strong> correcto de arquitectura y seguridad informática para que no nos cierren el chiringuito.</p>
-            </div>
-            <div class="rule-card">
-              <h3>💀 5 VIDAS CORPORATIVAS</h3>
-              <p>Cada vez que despidas al que no es o elijas una chapuza de remedio, Hacienda y los Jáqueres te quitan 1 vida (💼). Si pierdes las 5, ¡al talego!</p>
+            <div class="rules-grid">
+              <div class="rule-card">
+                <h3>1️⃣ ¡A LA CALLE!</h3>
+                <p>Adivina qué área falló y despide a su encargado.</p>
+              </div>
+              <div class="rule-card">
+                <h3>2️⃣ LA CAUSA</h3>
+                <p>Descubre por qué demonios ha pasado el fallo.</p>
+              </div>
+              <div class="rule-card">
+                <h3>3️⃣ EL REMEDIO</h3>
+                <p>Elige el parche técnico bueno para salvar la empresa.</p>
+              </div>
+              <div class="rule-card">
+                <h3>💀 5 VIDAS</h3>
+                <p>Si despides al inocente o eliges chapuzas, pierdes 1 vida.</p>
+              </div>
             </div>
           </div>
 
-          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn-primary" onclick="startGame(false)">🔥 EMPEZAR MODO CAMPAÑA (40 CASOS)</button>
-            <button class="btn-util" style="font-size: 1rem; padding: 14px 20px;" onclick="startGame(true)">🎲 MODO ORDEN ALEATORIO</button>
+          <div>
+            <button class="btn-primary" onclick="startGame(false)">🔥 JUGAR LAS 40 SITUACIONES</button>
+            <button class="btn-secondary" onclick="startGame(true)">🎲 JUGAR EN ORDEN ALEATORIO</button>
           </div>
         </div>
       </section>
 
-      <!-- PLAY SCREEN -->
+      <!-- PANTALLA DE JUEGO -->
       <section class="screen" id="playScreen">
-        <!-- BOSS HEADER -->
+        <!-- JEFE -->
         <div class="boss-header">
           <div class="boss-avatar">
             🧔‍♂️
-            <span class="boss-badge">EL JEFE</span>
+            <span class="boss-badge">CEO</span>
           </div>
           <div class="boss-speech">
-            <div class="boss-name">Don Rufino (CEO, 0% Informática, 100% Puro Habano)</div>
-            <div class="boss-quote" id="bossQuote">
-              "¡Me cago en la leche, Merche! ¿Quién ha dejado la puerta de los megabais abierta?"
-            </div>
+            <div class="boss-name">Don Rufino</div>
+            <div class="boss-quote" id="bossQuote">"¡Me cago en la leche, Merche!"</div>
           </div>
         </div>
 
-        <!-- INCIDENT BOX -->
+        <!-- SITUACIÓN -->
         <div class="incident-card">
           <span class="incident-tag" id="incidentNumberTag">SITUACIÓN #1 DE 40</span>
-          <div class="incident-title" id="incidentText">
-            Cargando situación...
-          </div>
+          <div class="incident-title" id="incidentText">Cargando...</div>
         </div>
 
-        <!-- 3-STEP TRACKER -->
+        <!-- 3 PASOS -->
         <div class="step-tracker">
-          <div class="step-item active" id="step1Indicator">1. ¿A QUIÉN DESPIDO? (Propiedad)</div>
-          <div class="step-item" id="step2Indicator">2. ¿CUÁL FUE LA CAUSA?</div>
-          <div class="step-item" id="step3Indicator">3. ¿QUÉ REMEDIO PONEMOS?</div>
+          <div class="step-item active" id="step1Indicator">1. DESPEDIR</div>
+          <div class="step-item" id="step2Indicator">2. CAUSA</div>
+          <div class="step-item" id="step3Indicator">3. REMEDIO</div>
         </div>
 
-        <!-- DYNAMIC INTERACTION AREA -->
-        <div id="interactionArea"></div>
-
-        <!-- FEEDBACK AREA -->
-        <div class="feedback-box" id="feedbackBox"></div>
+        <!-- ZONA INTERACTIVA -->
+        <div id="interactionArea" style="display: flex; flex-direction: column; flex: 1;"></div>
       </section>
 
-      <!-- END SCREEN -->
+      <!-- PANTALLA FINAL -->
       <section class="screen" id="endScreen">
         <div class="hero-banner">
-          <div class="hero-stamp" id="endStamp">¡QUIEBRA TOTAL!</div>
-          <h2 style="font-size: 2rem; margin-bottom: 12px; color: var(--accent-yellow);" id="endTitle">
-            La Policía Tecnológica ha precintado el chiringuito
-          </h2>
-          <p class="hero-subtitle" id="endSubtitle">
-            Has despedido hasta al ficus de recepción, pero los crákeres se han llevado hasta la cafetera.
-          </p>
+          <div>
+            <div class="hero-stamp" id="endStamp">¡QUIEBRA TOTAL!</div>
+            <h2 style="font-size: 1.3rem; margin-bottom: 8px; color: var(--accent-yellow);" id="endTitle">
+              La Policía ha precintado el chiringuito
+            </h2>
+            <p class="hero-subtitle" id="endSubtitle">
+              Has despedido hasta al ficus de recepción.
+            </p>
 
-          <div class="rules-grid" style="max-width: 600px; margin: 0 auto 24px auto;">
-            <div class="rule-card" style="text-align: center;">
-              <h3>📁 Casos Superados</h3>
-              <p style="font-size: 1.8rem; font-weight: 900; color: #fff;" id="endCases">0 / 40</p>
-            </div>
-            <div class="rule-card" style="text-align: center;">
-              <h3>🥾 Empleados Despedidos</h3>
-              <p style="font-size: 1.8rem; font-weight: 900; color: var(--accent-green);" id="endFired">0</p>
-            </div>
-            <div class="rule-card" style="text-align: center;">
-              <h3>💼 Vidas Restantes</h3>
-              <p style="font-size: 1.8rem; font-weight: 900; color: var(--accent-yellow);" id="endLives">0</p>
+            <div class="rules-grid">
+              <div class="rule-card" style="text-align: center;">
+                <h3>📁 Superados</h3>
+                <p style="font-size: 1.3rem; font-weight: 900; color: #fff;" id="endCases">0/40</p>
+              </div>
+              <div class="rule-card" style="text-align: center;">
+                <h3>🥾 Despidos</h3>
+                <p style="font-size: 1.3rem; font-weight: 900; color: var(--accent-green);" id="endFired">0</p>
+              </div>
             </div>
           </div>
 
-          <button class="btn-primary" onclick="startGame(false)">🔄 VOLVER A MONTAR OTRA EMPRESA</button>
+          <button class="btn-primary" onclick="startGame(false)">🔄 MONTAR OTRA EMPRESA</button>
         </div>
       </section>
 
@@ -832,7 +863,7 @@
 
   <script>
     // =========================================================================
-    // AUDIO SYNTH (Sin archivos externos, 100% autocontenido)
+    // SINTETIZADOR DE SONIDO WEB AUDIO (Compatible iOS Safari)
     // =========================================================================
     let soundEnabled = true;
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -842,6 +873,7 @@
       if (!soundEnabled) return;
       try {
         if (!audioCtx) audioCtx = new AudioCtx();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         const now = audioCtx.currentTime;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -851,44 +883,44 @@
         if (type === 'fire') {
           osc.type = 'sawtooth';
           osc.frequency.setValueAtTime(220, now);
-          osc.frequency.exponentialRampToValueAtTime(55, now + 0.25);
-          gain.gain.setValueAtTime(0.25, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
-          osc.start(now);
-          osc.stop(now + 0.25);
-        } else if (type === 'correct') {
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.setValueAtTime(659.25, now + 0.08);
-          gain.gain.setValueAtTime(0.2, now);
+          osc.frequency.exponentialRampToValueAtTime(55, now + 0.22);
+          gain.gain.setValueAtTime(0.22, now);
           gain.gain.linearRampToValueAtTime(0.01, now + 0.22);
           osc.start(now);
           osc.stop(now + 0.22);
+        } else if (type === 'correct') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.07);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
         } else if (type === 'wrong') {
           osc.type = 'square';
           osc.frequency.setValueAtTime(150, now);
-          osc.frequency.setValueAtTime(110, now + 0.12);
-          gain.gain.setValueAtTime(0.22, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+          osc.frequency.setValueAtTime(105, now + 0.12);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.26);
           osc.start(now);
-          osc.stop(now + 0.3);
+          osc.stop(now + 0.26);
         } else if (type === 'win') {
           osc.type = 'triangle';
           osc.frequency.setValueAtTime(523.25, now);
-          osc.frequency.setValueAtTime(659.25, now + 0.1);
-          osc.frequency.setValueAtTime(783.99, now + 0.2);
-          osc.frequency.setValueAtTime(1046.5, now + 0.3);
-          gain.gain.setValueAtTime(0.22, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.45);
+          osc.frequency.setValueAtTime(659.25, now + 0.08);
+          osc.frequency.setValueAtTime(783.99, now + 0.16);
+          osc.frequency.setValueAtTime(1046.5, now + 0.24);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.38);
           osc.start(now);
-          osc.stop(now + 0.45);
+          osc.stop(now + 0.38);
         }
       } catch (e) {}
     }
 
     function toggleSound() {
       soundEnabled = !soundEnabled;
-      document.getElementById('soundToggleBtn').textContent = soundEnabled ? '🔊 Sonido' : '🔇 Mudo';
+      document.getElementById('soundToggleBtn').textContent = soundEnabled ? '🔊' : '🔇';
     }
 
     function toggleTheory() {
@@ -896,7 +928,7 @@
     }
 
     // =========================================================================
-    // DEPARTAMENTOS Y EMPLEADOS (Con clones becarios cada vez que los despides)
+    // DEPARTAMENTOS Y EMPLEADOS
     // =========================================================================
     const DEPARTMENTS = {
       Confidencialidad: {
@@ -904,23 +936,21 @@
         title: 'Confidencialidad',
         icon: '🕵️‍♂️',
         baseName: 'Cayetano "El Cotilla"',
-        role: 'Jefe de Secretos y Chismes Cifrados',
         excuses: [
-          '"¡Jefe, yo puse un post-it que decía PROHIBIDO MIRAR!"',
-          '"¿Cifrar? ¡Yo creía que eso era echarle limón al pescado!"',
-          '"Solo se lo conté a un foro ruso de confianza, Don Rufino."'
+          '"¡Puse un post-it de PROHIBIDO MIRAR!"',
+          '"¿Cifrar? ¡Creía que era echar limón!"',
+          '"Solo se lo conté a un foro ruso, jefe."'
         ]
       },
       Integridad: {
         key: 'Integridad',
         title: 'Integridad',
         icon: '🛡️',
-        baseName: 'Mari Carmen "La Intocable"',
-        role: 'Jefa de Que Nadie Toque Mis Bits',
+        baseName: 'Mari Carmen "Intocable"',
         excuses: [
-          '"¡Por un par de ceros y unos cambiados tampoco se hunde el mundo!"',
-          '"Si los datos han cambiado solos será por el horóscopo, jefe."',
-          '"¿Bitácora de modificaciones? Yo apunto los cambios en servilletas."'
+          '"¡Por dos ceros cambiados no pasa ná!"',
+          '"Si cambian solos será por Mercurio retrógrado."',
+          '"Yo apunto los cambios en servilletas."'
         ]
       },
       Disponibilidad: {
@@ -928,11 +958,10 @@
         title: 'Disponibilidad',
         icon: '🔌',
         baseName: 'Paco "El Enchufes"',
-        role: 'Jefe de Que el Servidor No Eche Humo',
         excuses: [
-          '"¡Desenchufé el servidor para calentarme el bocadillo de calamares!"',
-          '"Si echa humo negro es que está pensando muy fuerte, Don Rufino."',
-          '"¿Mantenimiento preventivo? ¡Si funciona no lo toques!"'
+          '"¡Desenchufé el rack para el microondas!"',
+          '"Si echa humo negro es que piensa fuerte."',
+          '"¿Mantenimiento? ¡Si funciona no lo toques!"'
         ]
       },
       Autentificación: {
@@ -940,11 +969,10 @@
         title: 'Autentificación',
         icon: '🪪',
         baseName: 'Kevin "El Portero"',
-        role: 'Jefe de Credenciales, Permisos y Firmas',
         excuses: [
-          '"Me dijo que era usted disfrazado de jáquer y le di permiso root."',
-          '"La contraseña era 1234 para no gastarnos las neuronas, jefe."',
-          '"¿Firma digital? ¡Me enseñó un carnet del Club Megatrix y le dejé pasar!"'
+          '"Dijo que era usted y le di permiso root."',
+          '"La clave era 1234 para no olvidar."',
+          '"¡Me enseñó el carnet del Club Megatrix!"'
         ]
       }
     };
@@ -957,743 +985,741 @@
     };
 
     // =========================================================================
-    // LAS 40 SITUACIONES (Basadas en la tabla 1.5 Dinámica y Tema 1 UNIR)
+    // LAS 40 SITUACIONES
     // =========================================================================
     const SITUATIONS = [
-      // --- LAS 9 DE LA DIAPOSITIVA 1.5 DINÁMICA ---
       {
         id: 1,
-        situation: "Un usuario sin privilegios accede a memoria del kernel como Pedro por su casa.",
-        bossRant: "¡Un mindundi de contabilidad se ha metido hasta la cocina del 'Colonel Sanders' ese del ordenador! ¿Quién controla aquí los permisos y las credenciales de acceso a los recursos?",
+        situation: "Un usuario sin privilegios accede a memoria del kernel.",
+        bossRant: "¡Un mindundi de contabilidad se ha metido hasta la cocina del kernel! ¿Quién controla aquí los permisos?",
         property: "Autentificación",
-        cause: "No se separan correctamente los espacios de memoria ni se valida el rol/autorización del usuario.",
+        cause: "No se separan correctamente los espacios de memoria ni se valida la autorización.",
         wrongCauses: [
-          "El ventilador de la CPU soplaba hacia atrás y empujó los bits al kernel.",
+          "El ventilador soplaba hacia atrás y empujó los bits.",
           "Los cables de red estaban pelados y hacían eco.",
           "Falta de copias de seguridad en cintas VHS."
         ],
-        remedy: "Implementar aislamiento estricto de espacios de memoria (modo usuario vs modo kernel) y control de privilegios en la MMU.",
+        remedy: "Implementar aislamiento de espacios de memoria (usuario/kernel) y control de privilegios en la MMU.",
         wrongRemedies: [
           "Quitarle la silla al usuario para que teclee incómodo.",
-          "Subir el brillo del monitor al 100% para deslumbrar a los intrusos.",
+          "Subir el brillo del monitor al 100% para deslumbrar.",
           "Formatear el ratón cada viernes."
         ]
       },
       {
         id: 2,
-        situation: "Un atacante observa el tiempo de ejecución del CPU para inferir información sensible y claves privadas.",
-        bossRant: "¡Me han dicho que un tipo con un cronómetro del Decathlon nos ha adivinado las claves secretas solo mirando lo que tarda el cacharro en pensar!",
+        situation: "Un atacante observa el tiempo de ejecución del CPU para inferir información sensible.",
+        bossRant: "¡Un tipo con un cronómetro nos ha adivinado las claves secretas mirando lo que tarda el chip en pensar!",
         property: "Confidencialidad",
-        cause: "Canal lateral basado en diferencias de tiempo de ejecución (Timing Side-Channel Attack).",
+        cause: "Canal lateral basado en diferencias de tiempo de ejecución (Timing Side-Channel).",
         wrongCauses: [
-          "El reloj de pared de la oficina va cinco minutos adelantado.",
-          "Un corte de luz en la subestación eléctrica del polígono.",
-          "El disco duro tenía sectores defectuosos por humedad."
+          "El reloj de pared de la oficina va adelantado.",
+          "Un corte de luz en la subestación del polígono.",
+          "El disco duro tenía sectores con humedad."
         ],
-        remedy: "Implementar algoritmos criptográficos de tiempo constante para que todas las operaciones duren exactamente lo mismo.",
+        remedy: "Implementar algoritmos criptográficos de tiempo constante para que duren siempre lo mismo.",
         wrongRemedies: [
-          "Tapar el procesador con una manta zamorana para que no lo miren.",
-          "Obligar al procesador a descansar 15 minutos para el café.",
-          "Cambiar todas las contraseñas por emojis de berenjenas."
+          "Tapar el procesador con una manta zamorana.",
+          "Obligar a la CPU a parar 15 minutos para el café.",
+          "Cambiar las claves por emojis de berenjenas."
         ]
       },
       {
         id: 3,
-        situation: "Un proceso malicioso modifica datos en la memoria caché que estaban siendo usados por otro proceso.",
-        bossRant: "¡Un programa guarro le ha cambiado los números en la caché a la nómina y ahora resulta que le debo 8 millones al conserje! ¿Quién vigila que no nos toquen los datos?",
+        situation: "Un proceso modifica datos en caché usados por otro proceso.",
+        bossRant: "¡Un programa guarro ha cambiado los números en la caché y ahora le debo 8 millones al conserje!",
         property: "Integridad",
         cause: "Falta de aislamiento en la memoria caché entre procesos distintos.",
         wrongCauses: [
           "Exceso de polvo en la fuente de alimentación.",
-          "El servidor se quedó sin conexión Wi-Fi durante la tormenta.",
-          "Un empleado olvidó su contraseña de Windows."
+          "El servidor se quedó sin Wi-Fi en la tormenta.",
+          "Un empleado olvidó su clave de Windows."
         ],
-        remedy: "Particionar o aislar las líneas de caché por proceso/dominio de seguridad e invalidar entradas no autorizadas.",
+        remedy: "Particionar o aislar las líneas de caché por proceso e invalidar accesos no autorizados.",
         wrongRemedies: [
-          "Soplar el chip con un secador de pelo después de cada nómina.",
-          "Prohibir el uso de números mayores de 100 en la empresa.",
-          "Desactivar la memoria RAM y hacerlo todo con un ábaco."
+          "Soplar el chip con un secador de pelo.",
+          "Prohibir números mayores de 100 en la empresa.",
+          "Desactivar la RAM y usar un ábaco."
         ]
       },
       {
         id: 4,
-        situation: "Un chip se sobrecalienta hasta bloquearse por procesos no autorizados que ejecutan bucles continuamente.",
-        bossRant: "¡Huele a panceta quemada en la sala de máquinas! ¡Han puesto el chip a freír huevos y la web de la empresa está más muerta que Chanquete!",
+        situation: "Un chip se sobrecalienta por procesos no autorizados que ejecutan continuamente.",
+        bossRant: "¡Huele a panceta quemada en el servidor! ¡Han puesto el chip a freír huevos y la web se ha caído!",
         property: "Disponibilidad",
-        cause: "Denegación de servicio (DoS) a nivel físico o arquitectónico por agotamiento de recursos térmicos y de CPU.",
+        cause: "Denegación de servicio (DoS) a nivel físico o arquitectónico por agotamiento térmico y de CPU.",
         wrongCauses: [
-          "Fuga de claves criptográficas por correo electrónico.",
-          "Alteración silenciosa de una factura en la base de datos.",
-          "Suplantación de identidad mediante un token robado."
+          "Fuga de claves criptográficas por correo.",
+          "Alteración silenciosa de una factura.",
+          "Suplantación mediante un token robado."
         ],
-        remedy: "Limitar cuotas de CPU por proceso, monitorizar sensores térmicos y cortar ejecuciones anómalas (throttling/kill).",
+        remedy: "Limitar cuotas de CPU por proceso, monitorizar sensores térmicos y cortar ejecuciones abusivas.",
         wrongRemedies: [
-          "Echarle un cubo de agua con hielo directamente a la placa base.",
-          "Cifrar el humo con AES-256 para que nadie lo huela.",
-          "Obligar a los clientes a entrar en la web de uno en uno pidiendo vez."
+          "Echar un cubo de agua con hielo a la placa base.",
+          "Cifrar el humo con AES-256.",
+          "Dejar entrar a los clientes a la web de uno en uno."
         ]
       },
       {
         id: 5,
-        situation: "Una máquina virtual accede y manipula recursos de hardware asignados en exclusiva a otra máquina virtual.",
-        bossRant: "¡Las máquinas virtuales se están peleando como vecinos en junta de comunidad! ¡Una se ha saltado la tapia y ha ocupado el garaje de la otra! ¿Quién da los permisos aquí?",
+        situation: "Una máquina virtual accede a recursos asignados a otra máquina virtual.",
+        bossRant: "¡Una máquina virtual se ha saltado la tapia y se ha metido en el garaje de la otra! ¿Quién da permisos?",
         property: "Autentificación",
-        cause: "Una falla en el hipervisor o en el aislamiento de recursos permite escapar de la máquina virtual (VM Escape).",
+        cause: "Una falla en el hipervisor o en el aislamiento de recursos permite escapar de la máquina virtual.",
         wrongCauses: [
-          "Un terremoto de magnitud 7 en el centro de datos.",
-          "El cable HDMI estaba mal enchufado al proyector.",
-          "Batería de la BIOS agotada por antigüedad."
+          "Un terremoto en el centro de datos.",
+          "El cable HDMI estaba flojo en el proyector.",
+          "Batería de la BIOS agotada."
         ],
-        remedy: "Parchear el hipervisor, activar extensiones de virtualización segura por hardware (IOMMU / VT-d) y verificar permisos de acceso.",
+        remedy: "Parchear el hipervisor, activar aislamiento por hardware (IOMMU) y verificar permisos de recursos.",
         wrongRemedies: [
-          "Poner un tabique de pladur entre los dos monitores.",
-          "Instalar un antivirus gratuito de 2004 en el teclado.",
-          "Apagar internet los martes y jueves."
+          "Poner un tabique de pladur entre dos monitores.",
+          "Instalar un antivirus de 2004 en el teclado.",
+          "Apagar internet los martes."
         ]
       },
       {
         id: 6,
-        situation: "El equipo carga un firmware modificado por un cráker como si fuera el firmware legítimo del fabricante.",
-        bossRant: "¡El ordenador ha arrancado hablando en klingon y minando criptomonedas para mi exmujer! ¿Cómo se ha tragado un firmware pirata sin pedirle el DNI?",
+        situation: "El equipo carga un firmware modificado como si fuera el firmware legítimo.",
+        bossRant: "¡El ordenador ha arrancado hablando en klingon! ¿Cómo se traga un firmware pirata sin pedirle el DNI?",
         property: "Autentificación",
         cause: "No se verifica la firma digital del firmware durante el arranque o la actualización.",
         wrongCauses: [
-          "Inundación en la planta baja del edificio.",
-          "Saturación del ancho de banda por vídeos de gatitos.",
-          "Lectura de emisiones electromagnéticas del monitor."
+          "Inundación en la planta baja.",
+          "Saturación de red por vídeos de gatitos.",
+          "Lectura de ondas electromagnéticas del monitor."
         ],
-        remedy: "Habilitar Secure Boot (Arranque Seguro) con verificación criptográfica de firmas digitales en hardware (Root of Trust).",
+        remedy: "Habilitar Secure Boot con verificación criptográfica de firmas digitales en hardware.",
         wrongRemedies: [
-          "Pegar una pegatina de 'Solo Firmware Bueno' en el botón de encendido.",
-          "Comprar un SAI más gordo para que le entre más corriente.",
-          "Cambiar la fuente Times New Roman por Comic Sans."
+          "Poner una pegatina de 'Solo Firmware Bueno'.",
+          "Comprar un SAI más gordo.",
+          "Cambiar la fuente a Comic Sans."
         ]
       },
       {
         id: 7,
-        situation: "Una variación anómala de voltaje cambia bits en memoria durante una operación crítica (Fault Injection / Bit-flip).",
-        bossRant: "¡Ha pegado un chispazo el enchufe y el sueldo del becario ha pasado de 400€ a 400 millones! ¡Los bits se han dado la vuelta como una tortilla!",
+        situation: "Una variación anómala de voltaje cambia bits durante una operación.",
+        bossRant: "¡Ha pegado un chispazo el enchufe y el sueldo del becario ha pasado de 400€ a 400 millones!",
         property: "Integridad",
-        cause: "Protección eléctrica insuficiente o falta de mecanismos de detección y corrección de errores en memoria.",
+        cause: "Protección eléctrica insuficiente o falta de mecanismos de detección y corrección de errores.",
         wrongCauses: [
-          "El administrador compartió su contraseña en Twitter.",
-          "Un ataque de phishing por WhatsApp al director financiero.",
-          "Falta de licencias de Microsoft Office."
+          "El admin publicó su contraseña en Twitter.",
+          "Phishing por WhatsApp al director financiero.",
+          "Falta de licencias de Office."
         ],
-        remedy: "Utilizar memoria ECC (Error-Correcting Code), reguladores de voltaje y sensores de detección de inyección de fallos.",
+        remedy: "Utilizar memoria ECC (corrección de errores), reguladores de voltaje y sensores de fallos.",
         wrongRemedies: [
-          "Pedirle a los empleados que pedaleen en una bici estática para dar corriente limpia.",
-          "Hacer copias de seguridad en post-its amarillos.",
-          "Instalar un lector de iris en la puerta del baño."
+          "Poner a los becarios a pedalear en dinamos.",
+          "Hacer backups en post-its amarillos.",
+          "Poner lector de iris en la puerta del baño."
         ]
       },
       {
         id: 8,
-        situation: "Un fallo en el sistema de refrigeración obliga al servidor principal a reducir su rendimiento al mínimo o apagarse.",
-        bossRant: "¡Se ha roto el aire acondicionado del cuarto de escobas donde tenemos el servidor y nos hemos quedado sin sistema en pleno Black Friday!",
+        situation: "Un fallo en el sistema de refrigeración obliga al equipo a reducir su rendimiento o apagarse.",
+        bossRant: "¡Se ha roto el aire acondicionado del cuarto de escobas y se ha apagado el servidor en Black Friday!",
         property: "Disponibilidad",
-        cause: "Ventiladores defectuosos, sensores dañados o falta de mantenimiento preventivo periódico del equipo.",
+        cause: "Ventiladores defectuosos, sensores dañados o mantenimiento preventivo insuficiente.",
         wrongCauses: [
-          "Algoritmo de hash MD5 vulnerable a colisiones.",
-          "Falta de doble factor de autenticación en el correo.",
-          "Sniffing de paquetes en la red pública del aeropuerto."
+          "Algoritmo MD5 vulnerable a colisiones.",
+          "Falta de doble factor en el correo.",
+          "Sniffing de paquetes en el aeropuerto."
         ],
-        remedy: "Realizar mantenimiento preventivo periódico, instalar refrigeración redundante y facilitar el acceso al equipo de mantenimiento.",
+        remedy: "Dar mantenimiento preventivo periódico, refrigeración redundante y facilitar acceso a mantenimiento.",
         wrongRemedies: [
-          "Poner a tres becarios con abanicos de folclórica frente al rack.",
-          "Cifrar el disco duro dos veces para que dé menos calor.",
-          "Despedir a los clientes que se quejen de que la web no carga."
+          "Poner tres becarios con abanicos frente al rack.",
+          "Cifrar el disco dos veces para que dé menos calor.",
+          "Despedir a los clientes que se quejen."
         ]
       },
       {
         id: 9,
-        situation: "Un administrador niega rotundamente haber autorizado una actualización desastrosa de firmware, y no hay forma de probar que fue él.",
-        bossRant: "¡Alguien ha aprobado la actualización 'Destructor_v666.bin' y ahora todos silban mirando al techo diciendo 'yo no he sido'! ¡Quiero pruebas firmadas de quién ha sido!",
+        situation: "Un administrador niega haber autorizado una actualización de firmware dañina.",
+        bossRant: "¡Alguien aprobó 'Destructor_v666.bin' y ahora todos dicen 'yo no he sido'! ¡Quiero pruebas firmadas!",
         property: "Autentificación",
-        cause: "Falta de no repudio: la aprobación no quedó vinculada a su identidad mediante una firma digital o registro protegido.",
+        cause: "Falta de no repudio: la aprobación no quedó vinculada a su identidad con firma o registro protegido.",
         wrongCauses: [
-          "El disco duro estaba lleno de películas piratas.",
-          "Una tormenta solar alteró las ondas Wi-Fi.",
-          "Se bloqueó la salida de emergencia con cajas de folios."
+          "El disco estaba lleno de películas piratas.",
+          "Una tormenta solar alteró el Wi-Fi.",
+          "Se bloqueó la salida de emergencia con cajas."
         ],
-        remedy: "Exigir firma criptográfica individual por administrador y registrar cada acción en una bitácora inmutable de auditoría.",
+        remedy: "Vincular cada aprobación a la identidad mediante firma digital individual y bitácora protegida.",
         wrongRemedies: [
-          "Hacerles pasar por el polígrafo de 'Sálvame Deluxe'.",
-          "Usar una única cuenta 'admin/admin' compartida por toda la plantilla.",
-          "Borrar todos los logs para ahorrar espacio en disco."
+          "Llevarlos al polígrafo de televisión.",
+          "Usar una sola cuenta 'admin' para todos.",
+          "Borrar los logs para ahorrar disco."
         ]
       },
-
-      // --- 31 SITUACIONES ADICIONALES (TEMA 1 UNIR + ARQUITECTURA DE COMPUTADORES) ---
       {
         id: 10,
-        situation: "Un atacante utiliza Meltdown/Spectre aprovechando la ejecución especulativa del procesador para leer contraseñas guardadas en otra región de memoria.",
-        bossRant: "¡Dicen que el procesador es tan listo que 'adivina el futuro' y un jáquer le ha leído la mente para robarnos todos los secretos industriales!",
+        situation: "Un atacante usa Meltdown/Spectre en la ejecución especulativa de la CPU para leer claves de otra memoria.",
+        bossRant: "¡El procesador 'adivina el futuro' y un jáquer le ha leído la mente para robarnos los secretos!",
         property: "Confidencialidad",
-        cause: "La ejecución especulativa deja rastros observables en la caché de datos privados antes de comprobar los permisos.",
+        cause: "La ejecución especulativa deja rastros observables en caché de datos privados antes de validar permisos.",
         wrongCauses: [
-          "El procesador no tenía pasta térmica suficiente.",
-          "Un virus borró la tabla de particiones del disco.",
-          "Se cortó el suministro eléctrico durante una tormenta."
+          "Faltaba pasta térmica en el disipador.",
+          "Un virus borró la tabla de particiones.",
+          "Se cortó la luz durante una tormenta."
         ],
-        remedy: "Aplicar parches de microcódigo, aislamiento de tablas de páginas del kernel (KPTI) y barreras de especulación.",
+        remedy: "Aplicar parches de microcódigo, aislamiento de tablas del kernel (KPTI) y barreras de especulación.",
         wrongRemedies: [
-          "Comprar procesadores de los años 80 que no especulen nada.",
-          "Ponerle un gorrito de papel de aluminio al disipador.",
-          "Cambiar el teclado de sitio para despistar al procesador."
+          "Comprar procesadores de 1982.",
+          "Poner papel de aluminio al disipador.",
+          "Cambiar el teclado de sitio."
         ]
       },
       {
         id: 11,
-        situation: "Mediante el ataque 'Rowhammer', un proceso bombardea filas de memoria DRAM hasta cambiar bits en filas adyacentes.",
-        bossRant: "¡Están aporreando la memoria RAM como si fuera un tambor de Semana Santa y se nos están cambiando los datos de la fila de al lado!",
+        situation: "Mediante 'Rowhammer', un proceso bombardea filas de DRAM hasta cambiar bits en filas vecinas.",
+        bossRant: "¡Aporrean la memoria RAM como un tambor y se cambian solos los datos de la fila de al lado!",
         property: "Integridad",
-        cause: "Interferencia eléctrica entre celdas de memoria DRAM muy próximas al acceder repetidamente a la misma fila.",
+        cause: "Interferencia eléctrica entre celdas DRAM próximas al acceder repetidamente a la misma fila.",
         wrongCauses: [
-          "Los usuarios usan contraseñas con su fecha de cumpleaños.",
-          "Alguien robó el portátil del director en el metro.",
-          "Un incendio en el cuarto de baterías del SAI."
+          "Contraseñas con fechas de cumpleaños.",
+          "Robo del portátil en el metro.",
+          "Incendio en las baterías del SAI."
         ],
-        remedy: "Usar módulos DRAM con Target Row Refresh (TRR), memoria ECC y aumentar la tasa de refresco de memoria.",
+        remedy: "Usar módulos DRAM con Target Row Refresh (TRR), memoria ECC y mayor tasa de refresco.",
         wrongRemedies: [
-          "Envolver las memorias RAM en plástico de burbujas para que no retumben.",
-          "Prohibir que los programas lean la memoria más de dos veces al día.",
-          "Instalar un firewall en el cable del ratón."
+          "Envolver la RAM en plástico de burbujas.",
+          "Prohibir leer la RAM más de dos veces al día.",
+          "Instalar un firewall en la alfombrilla."
         ]
       },
       {
         id: 12,
-        situation: "Un dispositivo PCIe malicioso conectado al equipo utiliza Acceso Directo a Memoria (DMA) para volcar toda la RAM sin pasar por el procesador.",
-        bossRant: "¡Han enchufado una tarjeta rara y nos ha chupado toda la memoria RAM por una pajita sin pedirle permiso ni a la CPU!",
+        situation: "Una tarjeta PCIe maliciosa usa Acceso Directo a Memoria (DMA) para leer toda la RAM sin permiso de la CPU.",
+        bossRant: "¡Han enchufado una tarjeta rara y nos ha chupado toda la RAM por una pajita sin pasar por la CPU!",
         property: "Confidencialidad",
-        cause: "Acceso Directo a Memoria (DMA) sin restricciones que permite leer cualquier dirección física de la RAM.",
+        cause: "Acceso Directo a Memoria (DMA) sin restricciones que permite leer cualquier dirección física.",
         wrongCauses: [
-          "El monitor tenía píxeles muertos en la esquina.",
-          "Se inundó el sótano por una tubería rota.",
-          "El certificado SSL de la página web había caducado ayer."
+          "El monitor tenía píxeles muertos.",
+          "Se inundó el sótano por una tubería.",
+          "Caducó el certificado SSL de la web."
         ],
-        remedy: "Activar y configurar la IOMMU (Input-Output Memory Management Unit) para restringir a qué regiones de RAM accede cada periférico.",
+        remedy: "Activar la IOMMU para restringir a qué regiones de RAM puede acceder cada periférico.",
         wrongRemedies: [
-          "Rellenar todos los puertos de la placa base con silicona caliente.",
-          "Poner una contraseña de 40 letras al salvapantallas.",
-          "Bajar la resolución de la pantalla a 640x480."
+          "Tapar los puertos PCIe con silicona caliente.",
+          "Poner clave de 40 letras al salvapantallas.",
+          "Bajar la resolución a 640x480."
         ]
       },
       {
         id: 13,
-        situation: "Un atacante mide el consumo eléctrico instantáneo del chip criptográfico (SPA/DPA) para deducir la clave secreta AES.",
-        bossRant: "¡Se han enganchado al contador de la luz con unas pinzas y solo viendo los voltios que gasta el chip ya saben nuestras claves secretas!",
+        situation: "Un atacante mide el consumo eléctrico instantáneo del chip para deducir la clave secreta AES.",
+        bossRant: "¡Se han enganchado al contador de la luz y viendo los voltios que gasta el chip sacan nuestras claves!",
         property: "Confidencialidad",
-        cause: "Canal lateral por análisis de consumo de potencia (Power Analysis Side-Channel): el consumo varía según los bits de la clave.",
+        cause: "Canal lateral por análisis de consumo de potencia (Power Analysis): el consumo varía según los bits.",
         wrongCauses: [
-          "Contratamos la tarifa eléctrica más cara del mercado.",
-          "Un empleado borró sin querer la carpeta de clientes.",
-          "El servidor se apagó por exceso de humedad."
+          "Contratamos la tarifa eléctrica más cara.",
+          "Un empleado borró la carpeta de clientes.",
+          "El servidor se apagó por humedad."
         ],
-        remedy: "Aplicar enmascaramiento (masking) en hardware y balanceo de consumo eléctrico en las puertas lógicas del chip criptográfico.",
+        remedy: "Aplicar enmascaramiento (masking) y balanceo de consumo eléctrico en el hardware criptográfico.",
         wrongRemedies: [
-          "Enchufar una freidora industrial al mismo ladrón para hacer ruido eléctrico.",
+          "Enchufar una freidora al mismo ladrón.",
           "Pasar la contabilidad a papel carbón.",
           "Despedir a la compañía eléctrica."
         ]
       },
       {
         id: 14,
-        situation: "Todos los empleados de la oficina entran al servidor central usando la misma cuenta 'usuario1' y la contraseña 'patata' apuntada en la pizarra.",
-        bossRant: "¡Resulta que hasta el repartidor de pizzas entra al servidor porque la contraseña 'patata' está escrita con rotulador permanente en la pared!",
+        situation: "Toda la oficina entra al servidor con el usuario 'admin' y la clave 'patata' escrita en la pizarra.",
+        bossRant: "¡Hasta el repartidor de pizzas entra al servidor porque la clave 'patata' está escrita en la pared!",
         property: "Autentificación",
-        cause: "Ausencia de credenciales individuales robustas y falta de autenticación multifactor (lo que sabes, tienes y eres).",
+        cause: "Ausencia de credenciales individuales y falta de autenticación multifactor (lo que sabes, tienes y eres).",
         wrongCauses: [
-          "Fallo físico en el cabezal del disco duro magnético.",
-          "Desbordamiento de búfer en el controlador de sonido.",
-          "Ataque DDoS desde una red de frigoríficos inteligentes."
+          "Fallo físico en el cabezal del disco.",
+          "Desbordamiento de búfer en la tarjeta de sonido.",
+          "Ataque DDoS desde frigoríficos inteligentes."
         ],
-        remedy: "Implantar cuentas individuales con autenticación multifactor: contraseña robusta (lo que conoce) + token (lo que tiene) + biometría (lo que es).",
+        remedy: "Implantar cuentas individuales con MFA: contraseña (conoce) + token (tiene) + biometría (es).",
         wrongRemedies: [
-          "Cambiar la contraseña 'patata' por 'boniato' en la misma pizarra.",
-          "Quitar la luz del pasillo para que no se lea la pizarra.",
-          "Comprar servidores más caros con luces LED de colores."
+          "Cambiar 'patata' por 'boniato' en la pizarra.",
+          "Apagar la luz del pasillo para que no se lea.",
+          "Comprar servidores con luces LED."
         ]
       },
       {
         id: 15,
-        situation: "Un incendio en la sala de servidores destruye los equipos y los técnicos no pueden entrar a apagarlo porque las puertas están llenas de cajas de archivo.",
-        bossRant: "¡Se está quemando el servidor de facturación y los bomberos no pasan porque habéis apilado 400 cajas de albaranes de 1998 en la puerta!",
+        situation: "Hay un incendio en el servidor y los bomberos no pueden entrar porque la puerta está tapada con cajas.",
+        bossRant: "¡Se quema el servidor y los bomberos no pasan porque apilasteis 400 cajas de albaranes en la puerta!",
         property: "Disponibilidad",
-        cause: "Incumplimiento grave de seguridad física del material y equipo: bloquear las salidas de emergencia y obstaculizar el acceso.",
+        cause: "Fallo grave de seguridad física del equipo: bloquear salidas de emergencia y obstaculizar el acceso.",
         wrongCauses: [
-          "Inyección SQL en el formulario de contacto de la web.",
-          "Robo de cookies de sesión mediante Cross-Site Scripting.",
-          "Clave RSA demasiado corta (512 bits)."
+          "Inyección SQL en la web.",
+          "Robo de cookies por XSS.",
+          "Clave RSA demasiado corta."
         ],
-        remedy: "No bloquear jamás las salidas de emergencia, facilitar el acceso al equipo de mantenimiento/emergencias y aplicar el plan de contingencia.",
+        remedy: "No bloquear salidas de emergencia, facilitar acceso a mantenimiento/emergencias y plan de contingencia.",
         wrongRemedies: [
-          "Poner un cartel a las llamas que diga 'Prohibido el paso al fuego'.",
-          "Actualizar Windows mientras las llamas llegan al teclado.",
-          "Echarle la culpa al calentamiento global en la bitácora."
+          "Poner un cartel de 'Prohibido el paso al fuego'.",
+          "Actualizar Windows mientras arde.",
+          "Culpar al cambio climático en los logs."
         ]
       },
       {
         id: 16,
-        situation: "Una inundación por rotura de tuberías deja inutilizado el único centro de datos de la empresa durante tres semanas.",
-        bossRant: "¡El cuarto de servidores parece el Aquopolis! ¡Los discos duros están nadando a braza y no podemos facturar ni un euro!",
+        situation: "Una inundación destruye el único cuarto de servidores y la empresa queda parada tres semanas.",
+        bossRant: "¡El cuarto de servidores parece el Aquopolis! ¡Los discos duros están nadando a braza!",
         property: "Disponibilidad",
-        cause: "Amenaza natural (inundación) sin un plan de contingencia ni esquema de recuperación de desastres y continuidad de negocio.",
+        cause: "Amenaza natural (inundación) sin plan de contingencia ni esquema de recuperación de desastres.",
         wrongCauses: [
-          "Un ataque de fuerza bruta contra el servidor SSH.",
-          "Modificación no autorizada del registro de Windows.",
-          "Escucha pasiva (sniffing) en el cable de fibra óptica."
+          "Ataque de fuerza bruta por SSH.",
+          "Modificación del registro de Windows.",
+          "Sniffing en el cable de fibra."
         ],
-        remedy: "Implementar un Plan de Contingencia con centro de respaldo redundante (Disaster Recovery) tras un análisis de riesgos físicos.",
+        remedy: "Implementar un Plan de Contingencia con centro de respaldo (Disaster Recovery) tras análisis de riesgos.",
         wrongRemedies: [
-          "Meter todos los servidores en un saco de arroz gigante.",
-          "Darle manguitos y flotadores a los discos SSD.",
-          "Cifrar el agua para que no se filtre la información."
+          "Meter los servidores en un saco de arroz.",
+          "Ponerle manguitos a los discos SSD.",
+          "Cifrar el agua de la tubería."
         ]
       },
       {
         id: 17,
-        situation: "Un proceso escribe más datos de los que caben en un búfer de la pila (Buffer Overflow) y sobrescribe la dirección de retorno en memoria.",
-        bossRant: "¡Han metido diez kilos de morcilla en una tripa de medio kilo y se nos ha espachurrado toda la memoria del programa!",
+        situation: "Un proceso escribe más datos de los que caben en un búfer (Buffer Overflow) y altera la pila de memoria.",
+        bossRant: "¡Han metido diez kilos de morcilla en una tripa de medio kilo y han espachurrado la memoria!",
         property: "Integridad",
-        cause: "Falta de validación de límites de memoria que permite corromper direcciones de control en la pila.",
+        cause: "Falta de validación de límites de memoria que permite corromper direcciones en la pila.",
         wrongCauses: [
-          "El cable de red RJ45 tenía la pestaña rota.",
-          "Falta de aire acondicionado en la oficina contigua.",
-          "El usuario olvidó traer su tarjeta inteligente al trabajo."
+          "El cable RJ45 tenía la pestaña rota.",
+          "Falta de aire acondicionado en recepción.",
+          "El usuario olvidó su tarjeta inteligente."
         ],
-        remedy: "Activar protecciones de arquitectura como DEP/NX (páginas no ejecutables), ASLR y canarios de pila (Stack Canaries).",
+        remedy: "Activar protecciones DEP/NX (páginas no ejecutables), ASLR y canarios de pila (Stack Canaries).",
         wrongRemedies: [
-          "Comprar un monitor ultrapanorámico para que quepan textos más largos.",
-          "Limitar los nombres de los clientes a dos letras.",
-          "Reiniciar el router cada vez que alguien escriba rápido."
+          "Comprar un monitor más ancho.",
+          "Limitar los nombres de clientes a dos letras.",
+          "Reiniciar el router al escribir rápido."
         ]
       },
       {
         id: 18,
-        situation: "Se roban un disco duro del servidor y el ladrón lee tranquilamente toda la base de datos de clientes conectándolo a su casa.",
-        bossRant: "¡Se han llevado el disco duro en una bolsa del Mercadona y están vendiendo la lista de mis clientes VIP en el rastro!",
+        situation: "Roban un disco duro del servidor y leen toda la base de datos de clientes al enchufarlo en otro PC.",
+        bossRant: "¡Se han llevado el disco en una bolsa del súper y venden mis clientes VIP en el rastro!",
         property: "Confidencialidad",
-        cause: "Los datos almacenados estaban en texto claro (sin cifrado en reposo) y no se restringió el acceso físico al cuarto de servidores.",
+        cause: "Datos almacenados sin cifrar en reposo y falta de restricción de acceso físico al servidor.",
         wrongCauses: [
-          "Un pico de tensión quemó la tarjeta gráfica.",
-          "El procesador sufrió un bloqueo por interrupción infinita.",
-          "Los ventiladores giraban a demasiadas revoluciones."
+          "Un pico de tensión quemó la gráfica.",
+          "Bloqueo de CPU por interrupción infinita.",
+          "Ventiladores a demasiadas revoluciones."
         ],
-        remedy: "Cifrar los discos duros completos vinculados a un chip TPM y restringir cuidadosamente el acceso físico a los equipos.",
+        remedy: "Cifrar los discos duros vinculados a un chip TPM y restringir cuidadosamente el acceso físico.",
         wrongRemedies: [
-          "Pintar el disco duro de color camuflaje para que no lo vean.",
-          "Ponerle una alarma de coche al ratón.",
-          "Guardar los datos en disquetes de 3 y medio escondidos bajo el felpudo."
+          "Pintar el disco de color camuflaje.",
+          "Poner alarma de coche al ratón.",
+          "Guardar todo en disquetes bajo el felpudo."
         ]
       },
       {
         id: 19,
-        situation: "Un cráker intercepta el bus de comunicación entre la CPU y la memoria RAM externa con un analizador lógico para espiar datos en tránsito.",
-        bossRant: "¡Un tío con unas pinzas de electricista está escuchando lo que hablan el procesador y la memoria RAM por el pasillo de la placa base!",
+        situation: "Un cráker pincha el bus entre la CPU y la memoria RAM con un analizador lógico para espiar datos.",
+        bossRant: "¡Un tío con pinzas de electricista está escuchando lo que hablan la CPU y la RAM por la placa!",
         property: "Confidencialidad",
-        cause: "Los datos viajan sin cifrar por el bus de memoria física, permitiendo el espionaje por hardware (Bus Snooping).",
+        cause: "Los datos viajan en claro por el bus de memoria física, permitiendo espionaje por hardware (Bus Snooping).",
         wrongCauses: [
-          "El sistema operativo no tenía activado el protector de pantalla.",
-          "Se agotó el tóner de la impresora de red.",
-          "Un empleado borró un archivo Excel por accidente."
+          "No estaba puesto el salvapantallas.",
+          "Se acabó el tóner de la impresora.",
+          "Un becario borró un Excel sin querer."
         ],
-        remedy: "Utilizar cifrado de memoria en tiempo real por hardware en el controlador de memoria (como AMD SME o Intel TME/SGX).",
+        remedy: "Usar cifrado de memoria RAM en tiempo real por hardware en el controlador (AMD SME / Intel TME).",
         wrongRemedies: [
-          "Hablar muy bajito cerca del ordenador para que el bus no haga eco.",
-          "Untar la placa base con vaselina para que resbalen las pinzas.",
-          "Desconectar la memoria RAM cuando procesemos cosas secretas."
+          "Hablar bajito cerca del ordenador.",
+          "Untar la placa base con vaselina.",
+          "Quitar la RAM al procesar secretos."
         ]
       },
       {
         id: 20,
-        situation: "Un atacante modifica los registros de la tabla de páginas en memoria para que un programa normal apunte a direcciones del sistema operativo.",
-        bossRant: "¡Han cambiado las señales de tráfico de la memoria y ahora el buscaminas se cree que es el dueño absoluto del servidor!",
+        situation: "Un atacante modifica la tabla de páginas en memoria para que una app normal apunte al sistema operativo.",
+        bossRant: "¡Han cambiado las señales de tráfico de la memoria y ahora el Buscaminas manda en el servidor!",
         property: "Integridad",
-        cause: "Corrupción de las estructuras de control de la MMU (tablas de páginas) por falta de protección contra escritura.",
+        cause: "Corrupción de las tablas de páginas de la MMU por falta de protección contra escritura.",
         wrongCauses: [
-          "Un terremoto desconectó la fibra óptica submarina.",
-          "El lector de huellas dactilares estaba sucio de grasa de chorizo.",
-          "Un ataque de ingeniería social por teléfono."
+          "Un terremoto rompió la fibra submarina.",
+          "El lector de huellas tenía grasa de chorizo.",
+          "Ingeniería social por teléfono."
         ],
-        remedy: "Proteger las tablas de páginas en memoria de solo lectura para modos no privilegiados y validar permisos en la MMU.",
+        remedy: "Proteger las tablas de páginas en modo solo lectura para usuarios y validar permisos en la MMU.",
         wrongRemedies: [
-          "Imprimir las tablas de páginas en DIN-A4 y plastificarlas.",
-          "Bajar la frecuencia del reloj de la CPU a 1 MHz.",
-          "Quitar el Buscaminas y poner el Solitario Spider."
+          "Imprimir las tablas en DIN-A4 y plastificarlas.",
+          "Bajar el reloj de la CPU a 1 MHz.",
+          "Cambiar el Buscaminas por el Solitario."
         ]
       },
       {
         id: 21,
-        situation: "Un empleado descontento con permisos de administrador de toda la empresa pese a trabajar en recepción borra las bases de datos de producción.",
-        bossRant: "¡El recepcionista se ha cabreado porque no había café descafeinado y tenía permisos para borrar toda la empresa con un clic!",
+        situation: "Un recepcionista enfadado tenía permisos de Administrador Global y borra las bases de datos.",
+        bossRant: "¡El recepcionista se cabreó porque no había descafeinado y tenía permisos para borrar toda la empresa!",
         property: "Autentificación",
-        cause: "Amenaza interna por exceso de privilegios: no se aplicó el principio de mínimo privilegio en el control de acceso.",
+        cause: "Amenaza interna por exceso de privilegios: no se aplicó el principio de mínimo privilegio.",
         wrongCauses: [
-          "Radiación cósmica que invirtió un bit en la caché L1.",
-          "Sobrecalentamiento del puente norte de la placa base.",
-          "Canal lateral acústico por el ruido de las teclas."
+          "Rayos cósmicos en la caché L1.",
+          "Sobrecalentamiento del puente norte.",
+          "Canal lateral por el ruido del teclado."
         ],
-        remedy: "Aplicar el principio de mínimo privilegio basado en roles (RBAC) y revocar permisos innecesarios de forma periódica.",
+        remedy: "Aplicar el principio de mínimo privilegio por roles (RBAC) y auditar permisos periódicamente.",
         wrongRemedies: [
-          "Comprar café descafeinado blindado para que nadie se enfade.",
-          "Quitar la tecla 'Suprimir' de todos los teclados de la oficina.",
-          "Hacer que todos los empleados firmen un juramento por Snoopy."
+          "Comprar café descafeinado blindado.",
+          "Arrancar la tecla Suprimir de los teclados.",
+          "Hacerles jurar lealtad por Snoopy."
         ]
       },
       {
         id: 22,
-        situation: "Un atacante clona la tarjeta magnética antigua de un directivo y entra al centro de datos y a su estación de trabajo sin contraseña.",
-        bossRant: "¡Han copiado mi tarjeta VIP con un cacharro comprado en AliExpress y se han sentado en mi sillón de cuero a mandar transferencias!",
+        situation: "Clonan la tarjeta magnética antigua de un directivo y entran a su sesión sin pedir contraseña.",
+        bossRant: "¡Han copiado mi tarjeta VIP con un cacharro de AliExpress y están mandando transferencias!",
         property: "Autentificación",
-        cause: "Dependencia de un único factor débil ('lo que el usuario tiene' sin protección criptográfica) sin combinar con contraseña o biometría.",
+        cause: "Uso de un solo factor débil ('lo que tiene' clonable) sin combinar con contraseña ni biometría.",
         wrongCauses: [
-          "Fallo en el ventilador de la fuente de alimentación.",
-          "Corrupción de datos por corte eléctrico repentino.",
-          "Fuga de memoria en el navegador web."
+          "Fallo en el ventilador de la fuente.",
+          "Corrupción por corte eléctrico.",
+          "Fuga de memoria en el navegador."
         ],
-        remedy: "Actualizar a tarjetas inteligentes criptográficas combinadas con biometría ('lo que es') y PIN/contraseña ('lo que conoce').",
+        remedy: "Usar tarjetas inteligentes criptográficas combinadas con biometría ('lo que es') y PIN ('lo que sabe').",
         wrongRemedies: [
-          "Forrar la tarjeta magnética con lonchas de jamón york.",
-          "Poner un felpudo trampa delante del despacho del jefe.",
-          "Cambiar el sillón de cuero por un taburete de madera."
+          "Forrar la tarjeta con jamón york.",
+          "Poner un cepo de osos en el despacho.",
+          "Cambiar el sillón por un taburete."
         ]
       },
       {
         id: 23,
-        situation: "Un troyano de hardware oculto en un chip fabricado sin control modifica silenciosamente el generador de números aleatorios para que las claves sean predecibles.",
-        bossRant: "¡El chip que compré de oferta en un mercadillo viene trucado de fábrica y todas nuestras claves secretas salen siempre '7777'!",
+        situation: "Un troyano de hardware en un chip debilita el generador de números aleatorios para que las claves sean predecibles.",
+        bossRant: "¡El chip de oferta del mercadillo viene trucado y todas las claves secretas salen '7777'!",
         property: "Confidencialidad",
-        cause: "Debilitamiento del generador de números aleatorios por hardware (TRNG), haciendo que las claves de cifrado sean adivinables.",
+        cause: "Manipulación del generador aleatorio de hardware (TRNG), haciendo adivinables las claves de cifrado.",
         wrongCauses: [
-          "Inundación en la sala de telecomunicaciones.",
-          "El usuario introdujo mal su huella dactilar tres veces.",
-          "Saturación del disco duro por archivos temporales."
+          "Inundación en telecomunicaciones.",
+          "El usuario falló su huella tres veces.",
+          "Disco lleno de archivos temporales."
         ],
-        remedy: "Auditar la cadena de suministro de hardware, realizar pruebas de entropía continua y combinar múltiples fuentes de aleatoriedad.",
+        remedy: "Auditar la cadena de suministro, verificar la entropía continuamente y mezclar fuentes de aleatoriedad.",
         wrongRemedies: [
-          "Tirar un dado de parchís encima del teclado para elegir las claves.",
-          "Lavar los microchips con lejía antes de soldarlos.",
-          "Subir el volumen de los altavoces para asustar al troyano."
+          "Tirar dados de parchís sobre el teclado.",
+          "Lavar los chips con lejía.",
+          "Poner música alta para asustar al troyano."
         ]
       },
       {
         id: 24,
-        situation: "Un atacante congela los módulos de memoria RAM con spray de nitrógeno líquido (Cold Boot Attack) y los extrae para leer las claves antes de que se borren.",
-        bossRant: "¡Han entrado con un bote de spray congelante como si fueran Batman, han helado la RAM y se han llevado las claves fresquitas en una nevera de playa!",
+        situation: "Congelan la RAM con nitrógeno líquido (Cold Boot Attack) y la extraen para leer las claves antes de que se borren.",
+        bossRant: "¡Han helado la RAM con un spray como Mr. Freeze y se han llevado las claves en una nevera de playa!",
         property: "Confidencialidad",
-        cause: "Persistencia de datos (remanencia) en celdas DRAM a bajas temperaturas tras apagar el equipo sin cifrado de memoria.",
+        cause: "Remanencia de datos en celdas DRAM a baja temperatura tras apagar sin cifrado de memoria.",
         wrongCauses: [
-          "Denegación de servicio por exceso de peticiones HTTP.",
-          "Un administrador negó haber firmado el contrato.",
-          "Modificación accidental de un archivo Word por un becario."
+          "Denegación de servicio por peticiones HTTP.",
+          "Un admin negó haber firmado un contrato.",
+          "Modificación accidental de un Word."
         ],
-        remedy: "Habilitar el cifrado de memoria RAM por hardware, limpieza de memoria al apagar/reiniciar (Memory Scrambling) y chasis con sensor de apertura.",
+        remedy: "Habilitar cifrado de RAM por hardware, limpieza al apagar (Memory Scrambling) y sensor de chasis.",
         wrongRemedies: [
-          "Poner una estufa de butano pegada a la memoria RAM todo el año.",
-          "Prohibir la entrada de pingüinos y heladeros a la oficina.",
-          "Guardar la memoria RAM en el microondas por las noches."
+          "Pegar una estufa de butano a la RAM.",
+          "Prohibir la entrada de heladeros.",
+          "Guardar la RAM en el microondas."
         ]
       },
       {
         id: 25,
-        situation: "Un fallo en la política de coherencia de caché en un procesador multinúcleo hace que dos núcleos operen con versiones distintas y corruptas del mismo saldo bancario.",
-        bossRant: "¡El núcleo 1 dice que tenemos un millón en el banco y el núcleo 2 dice que debemos hasta las camisas! ¡Ni los núcleos del chip se ponen de acuerdo!",
+        situation: "Un fallo de coherencia de caché en una CPU multinúcleo hace que dos núcleos operen con saldos distintos y corruptos.",
+        bossRant: "¡El núcleo 1 dice que somos ricos y el núcleo 2 que estamos en quiebra! ¡No se aclaran ni ellos!",
         property: "Integridad",
-        cause: "Defecto en el protocolo de coherencia de caché o falta de sincronización atómica entre núcleos del procesador.",
+        cause: "Fallo en el protocolo de coherencia de caché o falta de sincronización atómica entre núcleos.",
         wrongCauses: [
-          "Robo de contraseñas mediante un correo de phishing.",
-          "Incendio en la cafetería de la planta baja.",
-          "Espionaje de pantalla mediante cámara oculta."
+          "Robo de claves por phishing.",
+          "Incendio en la cafetería.",
+          "Cámara oculta apuntando al monitor."
         ],
-        remedy: "Aplicar instrucciones atómicas, barreras de memoria adecuadas y verificar el protocolo de coherencia de caché (MESI/MOESI).",
+        remedy: "Usar operaciones atómicas, barreras de memoria y verificar el protocolo de coherencia (MESI/MOESI).",
         wrongRemedies: [
-          "Quedarnos siempre con el núcleo que diga que tenemos más dinero.",
-          "Arrancar con alicates todos los núcleos menos uno.",
+          "Hacer caso solo al núcleo más optimista.",
+          "Arrancar con alicates los demás núcleos.",
           "Reiniciar el banco cada media hora."
         ]
       },
       {
         id: 26,
-        situation: "Un ataque DDoS inunda la tarjeta de red con millones de paquetes por segundo, saturando las interrupciones de hardware de la CPU y dejando el servidor colgado.",
-        bossRant: "¡Nos están mandando tantos paquetes por internet que la CPU se ha quedado bizca atendiendo el timbre y no responde ni a su madre!",
+        situation: "Un ataque DDoS satura las interrupciones de hardware de la CPU con millones de paquetes de red y cuelga el servidor.",
+        bossRant: "¡Mandan tantos paquetes que la CPU se ha quedado bizca abriendo la puerta y no atiende a nadie!",
         property: "Disponibilidad",
-        cause: "Agotamiento de ciclos de CPU por tormenta de interrupciones de hardware (Interrupt Storm) ante tráfico masivo.",
+        cause: "Agotamiento de CPU por tormenta de interrupciones de hardware (Interrupt Storm) ante tráfico masivo.",
         wrongCauses: [
-          "Lectura no autorizada de archivos confidenciales de RRHH.",
-          "Alteración de los importes en las nóminas de dirección.",
-          "Suplantación de huella dactilar con un dedo de goma."
+          "Lectura no autorizada de nóminas.",
+          "Alteración de importes bancarios.",
+          "Dedo de goma en el lector biométrico."
         ],
-        remedy: "Usar moderación de interrupciones (Interrupt Coalescing / NAPI), filtrado de paquetes en hardware (SmartNIC/Firewall) y mitigación DDoS.",
+        remedy: "Activar moderación de interrupciones (Interrupt Coalescing), filtrado en hardware (SmartNIC) y anti-DDoS.",
         wrongRemedies: [
-          "Cortar el cable de fibra óptica con unas tijeras de podar.",
-          "Mandarles nosotros el doble de correos spam de vuelta.",
-          "Cambiar la contraseña del Wi-Fi por una más larga."
+          "Cortar la fibra óptica con tijeras de podar.",
+          "Mandarles el doble de spam de vuelta.",
+          "Poner una clave Wi-Fi más larga."
         ]
       },
       {
         id: 27,
-        situation: "Se accede a la interfaz de depuración física JTAG de la placa base en producción porque el fabricante olvidó deshabilitarla, tomando el control total sin credenciales.",
-        bossRant: "¡La placa base tenía un enchufe secreto de fábrica para los mecánicos y un cráker se ha conectado ahí como si fuera la máquina de diagnosis del taller!",
+        situation: "Un intruso se conecta al puerto JTAG de depuración de la placa base y toma el control total sin autenticarse.",
+        bossRant: "¡La placa tenía un enchufe de taller abierto de fábrica y se han conectado sin llave ni contraseña!",
         property: "Autentificación",
-        cause: "Puertos físicos de depuración (JTAG/UART) abiertos en producción sin autenticación criptográfica ni bloqueo por fusibles.",
+        cause: "Interfaz física de depuración (JTAG/UART) abierta en producción sin autenticación ni bloqueo.",
         wrongCauses: [
-          "Corte de suministro eléctrico en toda la ciudad.",
-          "Corrupción de un sector del disco por desgaste natural.",
-          "Inundación por lluvia torrencial en el tejado."
+          "Apagón en toda la ciudad.",
+          "Sector de disco desgastado.",
+          "Gotera encima del armario rack."
         ],
-        remedy: "Fundir los eFuses de bloqueo de JTAG antes de pasar a producción o exigir autenticación criptográfica por desafío-respuesta para depurar.",
+        remedy: "Deshabilitar JTAG mediante eFuses en producción o exigir autenticación criptográfica desafío-respuesta.",
         wrongRemedies: [
-          "Tapar los pines de la placa con un chicle de menta usado.",
-          "Hacer copias de seguridad del teclado todas las noches.",
-          "Instalar un certificado HTTPS en la máquina de café."
+          "Tapar el puerto JTAG con un chicle.",
+          "Hacer backup del teclado cada noche.",
+          "Poner HTTPS a la cafetera."
         ]
       },
       {
         id: 28,
-        situation: "Las bitácoras (logs) donde se registraban los accesos al sistema han sido modificadas por un intruso para borrar su rastro tras colarse.",
-        bossRant: "¡El ladrón no solo ha entrado a robar, sino que encima ha borrado el libro de visitas y ha puesto que el que entró fue el Pato Donald!",
+        situation: "Un intruso modifica la bitácora (logs) del sistema para borrar su rastro tras hacer cambios ilegales.",
+        bossRant: "¡El ladrón ha borrado el libro de visitas del servidor y ha escrito que entró el Pato Donald!",
         property: "Integridad",
-        cause: "Los registros de la bitácora del sistema no estaban protegidos contra modificación ni enviados a un servidor de auditoría aislado.",
+        cause: "La bitácora del sistema no estaba protegida contra escritura ni replicada en un servidor aislado.",
         wrongCauses: [
-          "El servidor se apagó por falta de ventilación.",
-          "Los usuarios no recordaban cómo encender el monitor.",
-          "Una tormenta eléctrica quemó el router principal."
+          "El servidor se apagó por calor.",
+          "Nadie sabía encender el monitor.",
+          "Un rayo quemó el router."
         ],
-        remedy: "Almacenar las bitácoras en sistemas WORM (solo escritura), firmarlas criptográficamente y replicarlas en tiempo real a un SIEM externo.",
+        remedy: "Guardar bitácoras en almacenamiento WORM (solo escritura), firmarlas y enviarlas a un SIEM externo.",
         wrongRemedies: [
-          "Dejar de registrar logs para que los jáqueres no tengan nada que borrar.",
-          "Contratar a un jubilado para que mire la pantalla sin parpadear.",
-          "Comprimir los logs en un ZIP sin contraseña."
+          "No guardar logs para que no los borren.",
+          "Poner a un jubilado a vigilar el monitor.",
+          "Meter los logs en un ZIP sin clave."
         ]
       },
       {
         id: 29,
-        situation: "Un atacante captura las emisiones electromagnéticas del cable del monitor (ataque TEMPEST / Van Eck Phreaking) desde una furgoneta en la calle para ver la pantalla del CEO.",
-        bossRant: "¡Hay una furgoneta de reparto de churros aparcada abajo con una antena parabólica viendo en su tele todo lo que escribo en mi pantalla!",
+        situation: "Desde una furgoneta captan las ondas electromagnéticas del cable de vídeo (TEMPEST) y ven la pantalla del CEO.",
+        bossRant: "¡Una furgoneta de churros abajo con una antena está viendo en su tele todo lo que escribo en mi PC!",
         property: "Confidencialidad",
-        cause: "Fuga de información por radiaciones electromagnéticas no blindadas emitidas por el hardware de vídeo.",
+        cause: "Fuga de información por emisiones electromagnéticas no blindadas en el hardware de vídeo.",
         wrongCauses: [
-          "Fallo en el sistema de archivos NTFS tras un apagón.",
-          "Exceso de permisos en la carpeta compartida de red.",
-          "Denegación de servicio por llenado de la partición raíz."
+          "Error en el sistema NTFS tras apagón.",
+          "Permisos abiertos en carpeta de red.",
+          "Disco lleno en la partición raíz."
         ],
-        remedy: "Utilizar cables apantallados, blindaje electromagnético (jaula de Faraday / estándar TEMPEST) y señales de vídeo digitales cifradas.",
+        remedy: "Usar cables apantallados, blindaje electromagnético (TEMPEST / Faraday) y señal digital cifrada.",
         wrongRemedies: [
-          "Bajar las persianas de madera para que no pasen las ondas de radio.",
-          "Bajar a comprarles dos docenas de churros para que se vayan.",
-          "Desfragmentar el disco duro tres veces seguidas."
+          "Bajar las persianas de madera.",
+          "Comprarles dos docenas de churros.",
+          "Desfragmentar el disco tres veces."
         ]
       },
       {
         id: 30,
-        situation: "Durante una caída de tensión, la empresa se queda totalmente parada porque nadie había probado jamás si las baterías del SAI (UPS) seguían funcionando.",
-        bossRant: "¡Se va la luz un segundo, salta el SAI ese carísimo que compramos en 2012 y hace 'puf' porque la batería estaba más seca que la mojama!",
+        situation: "Se va la luz y el servidor se apaga de golpe porque nadie comprobó en 10 años que la batería del SAI estaba muerta.",
+        bossRant: "¡Salta el SAI carísimo de 2012 y hace 'puf' porque la batería estaba más seca que la mojama!",
         property: "Disponibilidad",
-        cause: "Falta de mantenimiento preventivo periódico y ausencia de pruebas de riesgo sobre los equipos de respaldo eléctrico.",
+        cause: "Falta de mantenimiento preventivo periódico y ausencia de pruebas de riesgo en equipos eléctricos.",
         wrongCauses: [
-          "Robo de claves privadas mediante ataque de canal lateral.",
-          "Modificación maliciosa del código fuente en el repositorio.",
-          "Suplantación de dirección MAC en la red local."
+          "Robo de claves por canal lateral.",
+          "Modificación del código fuente.",
+          "Suplantación de dirección MAC."
         ],
-        remedy: "Establecer un plan de mantenimiento preventivo periódico, realizar pruebas de riesgo reales de los SAIs y revisar el plan de contingencia.",
+        remedy: "Realizar mantenimiento preventivo periódico, pruebas de riesgo a los SAIs y actualizar el plan de contingencia.",
         wrongRemedies: [
-          "Conectar el servidor a dos pilas alcalinas AA con cinta aislante.",
-          "Rezar a Santa Rita cada vez que se nuble el cielo.",
-          "Cifrar la batería del SAI con una contraseña de 16 caracteres."
+          "Empalmar dos pilas AA con cinta aislante.",
+          "Rezar cada vez que se nuble el cielo.",
+          "Poner contraseña de 16 letras a la batería."
         ]
       },
       {
         id: 31,
-        situation: "Un empleado cae en un engaño por desconocimiento total de las normas básicas y entrega las claves porque nadie en la empresa recibió jamás formación ni conocía la política de seguridad.",
-        bossRant: "¡Le han llamado diciendo que eran 'el inspector de billeteras de Microsoft' y les ha cantado hasta el PIN de la tarjeta de empresa! ¿Es que nadie les ha explicado nada?",
+        situation: "Un empleado entrega sus credenciales por teléfono porque jamás se definió una política de seguridad ni se dieron capacitaciones.",
+        bossRant: "¡Le llamó 'el inspector de billeteras de Windows' y le dio todas las claves! ¿Nadie les enseña nada?",
         property: "Autentificación",
-        cause: "Amenaza humana por negligencia/ignorancia derivada de no definir una política de seguridad ni dar capacitaciones antes del incidente.",
+        cause: "Amenaza humana por negligencia/ignorancia al no definir políticas ni dar capacitaciones previas.",
         wrongCauses: [
-          "Sobrecalentamiento de la memoria caché L3.",
-          "Fallo mecánico en los platos del disco duro.",
-          "Variación de voltaje en la línea de 12V de la fuente."
+          "Sobrecalentamiento de la caché L3.",
+          "Fallo mecánico del disco duro.",
+          "Pico de voltaje en la línea de 12V."
         ],
-        remedy: "Tomar las acciones previas al incidente: definir una política de seguridad, difundir el plan por escrito, dar capacitaciones y hacer pruebas de riesgo.",
+        remedy: "Acciones previas al incidente: definir política de seguridad, difundir plan por escrito, capacitar y hacer pruebas.",
         wrongRemedies: [
-          "Cortarles la lengua a los empleados para que no hablen por teléfono.",
-          "Reemplazar todos los teléfonos por vasos de yogur con un hilo.",
-          "Subir la velocidad de los ventiladores de la CPU."
+          "Prohibir hablar por teléfono en la oficina.",
+          "Usar vasos de yogur con un hilo.",
+          "Subir la velocidad de los ventiladores."
         ]
       },
       {
         id: 32,
-        situation: "Un proceso sin autorización sobrescribe la tabla de vectores de interrupción en memoria para ejecutar código malicioso cada vez que se pulsa una tecla.",
-        bossRant: "¡Cada vez que pulso la tecla 'Enter' el ordenador pide una pizza familiar a domicilio a nombre de la empresa! ¡Han trucado las interrupciones!",
+        situation: "Un proceso sin autorización sobrescribe la tabla de vectores de interrupción en memoria para ejecutar malware al pulsar teclas.",
+        bossRant: "¡Cada vez que pulso Enter el ordenador pide una pizza familiar a cargo de la empresa!",
         property: "Integridad",
-        cause: "Falta de protección de escritura sobre la tabla de descriptores de interrupción (IDT) en memoria.",
+        cause: "Falta de protección contra escritura sobre la tabla de descriptores de interrupción (IDT) en RAM.",
         wrongCauses: [
-          "Humedad excesiva en el almacén de suministros.",
-          "El servidor web se quedó sin ancho de banda el domingo.",
-          "El certificado digital del DNI electrónico estaba caducado."
+          "Humedad en el almacén de papel.",
+          "El servidor se quedó sin internet.",
+          "Caducó el DNI electrónico."
         ],
-        remedy: "Proteger los registros y la tabla de interrupciones (IDTR/IDT) mediante anillos de privilegio del procesador (Ring 0) y memoria de solo lectura.",
+        remedy: "Proteger la tabla de interrupciones (IDT) en Ring 0 del procesador y páginas de solo lectura.",
         wrongRemedies: [
-          "Prohibir pulsar la tecla Enter y obligar a usar solo el ratón.",
-          "Llegar a un acuerdo comercial con la pizzería.",
+          "Arrancar la tecla Enter del teclado.",
+          "Hacerse socio de la pizzería.",
           "Limpiar el teclado con alcohol de romero."
         ]
       },
       {
         id: 33,
-        situation: "Cuando un proceso termina, el sistema operativo reasigna sus páginas de memoria RAM a otro usuario sin borrarlas antes, permitiéndole leer datos médicos del proceso anterior.",
-        bossRant: "¡El programa de contabilidad ha abierto una hoja nueva y le ha salido la radiografía de la cadera del director general que estaba antes en la RAM!",
+        situation: "Al cerrarse un programa, el sistema entrega sus páginas de RAM a otro usuario sin borrarlas, revelando datos privados.",
+        bossRant: "¡El contable abrió una hoja nueva y le salió en la RAM la radiografía de mi cadera!",
         property: "Confidencialidad",
-        cause: "Falta de limpieza de memoria (Memory Zeroing) al liberar y reasignar páginas de RAM o registros entre procesos.",
+        cause: "Falta de puesta a cero de la memoria (Memory Zeroing) antes de reasignar páginas de RAM a otro proceso.",
         wrongCauses: [
-          "Ataque de denegación de servicio contra el router de borde.",
-          "Alteración de paquetes TCP mediante Man-in-the-Middle.",
-          "Rotura del sistema de refrigeración líquida."
+          "Ataque DDoS al router principal.",
+          "Modificación de paquetes TCP.",
+          "Fuga en la refrigeración líquida."
         ],
-        remedy: "Forzar la puesta a cero (zeroing) de todas las páginas de memoria y registros del procesador antes de asignarlos a un nuevo contexto.",
+        remedy: "Forzar el borrado (zeroing) de páginas de RAM y registros de CPU antes de reasignarlos.",
         wrongRemedies: [
-          "Agitar la torre del ordenador como una coctelera para que se borre la RAM.",
-          "Pedirle a los empleados que cierren los ojos al abrir un programa nuevo.",
-          "Instalar un cortafuegos de ladrillo refractario."
+          "Agitar la torre como una coctelera.",
+          "Cerrar los ojos al abrir un programa.",
+          "Poner un muro de ladrillo junto al PC."
         ]
       },
       {
         id: 34,
-        situation: "Un atacante aprovecha una condición de carrera (TOCTOU: Time-Of-Check to Time-Of-Use) para cambiar un archivo validado por otro malicioso justo antes de que la CPU lo ejecute.",
-        bossRant: "¡Le han dado el cambiazo al archivo más rápido que un trilero en las Ramblas: enseñan el archivo bueno al portero y meten el malo por debajo!",
+        situation: "Mediante una condición de carrera (TOCTOU), cambian un fichero ya verificado por otro malicioso justo antes de que la CPU lo ejecute.",
+        bossRant: "¡Nos han hecho el cambiazo de archivo más rápido que un trilero: enseñan el bueno y meten el malo!",
         property: "Integridad",
-        cause: "Falta de atomicidad entre el momento en que se verifica la integridad/permiso de un recurso y el momento en que se utiliza.",
+        cause: "Falta de atomicidad entre el instante en que se comprueba la integridad del recurso y cuando se usa.",
         wrongCauses: [
-          "Apagón generalizado por caída de un rayo.",
-          "Fuga de datos por micrófono láser en la ventana.",
-          "Olvido de la contraseña maestra de la BIOS."
+          "Apagón por caída de un rayo.",
+          "Micrófono láser en la ventana.",
+          "Olvido de la clave de la BIOS."
         ],
-        remedy: "Realizar verificaciones y ejecuciones de forma atómica sobre descriptores bloqueados en memoria segura sin releer desde almacenamiento no confiable.",
+        remedy: "Ejecutar y verificar de forma atómica bloqueando el recurso en memoria segura sin releer del disco.",
         wrongRemedies: [
-          "Hacer que el procesador vaya más despacio para pillar al trilero.",
-          "Contratar a un árbitro de fútbol con VAR para mirar los archivos.",
-          "Desactivar el disco duro y usar solo la disquetera."
+          "Hacer que la CPU vaya más lenta.",
+          "Contratar a un árbitro con VAR.",
+          "Quitar el disco duro y usar disquetes."
         ]
       },
       {
         id: 35,
-        situation: "Un micrófono cercano capta el zumbido acústico de alta frecuencia de los condensadores de la placa base mientras la CPU descifra un mensaje RSA, revelando la clave privada.",
-        bossRant: "¡Han grabado el pitidito que hacen las tripas del ordenador con el móvil y con eso nos han sacado la clave secreta RSA! ¡Esto es brujería!",
+        situation: "Un micrófono graba el zumbido acústico de los condensadores de la placa mientras la CPU descifra RSA y deduce la clave privada.",
+        bossRant: "¡Han grabado el pitidito de las tripas del PC con el móvil y con eso han sacado la clave RSA!",
         property: "Confidencialidad",
-        cause: "Canal lateral acústico (Acoustic Cryptanalysis): las variaciones de carga de la CPU al procesar la clave hacen vibrar los componentes electrónicos.",
+        cause: "Canal lateral acústico: las variaciones de carga al procesar la clave hacen vibrar los componentes.",
         wrongCauses: [
-          "Corrupción de la base de datos por cierre inesperado.",
-          "Bloqueo de cuentas de usuario por intentos fallidos.",
-          "Sobrecarga del servidor de correo por archivos adjuntos gigantes."
+          "Base de datos corrupta tras apagón.",
+          "Cuenta bloqueada por fallar el PIN.",
+          "Buzón de correo lleno de vídeos."
         ],
-        remedy: "Implementar cegado criptográfico (blinding), algoritmos de consumo uniforme y aislamiento acústico/físico en entornos críticos.",
+        remedy: "Usar cegado criptográfico (blinding), ejecución de consumo uniforme y aislamiento acústico.",
         wrongRemedies: [
-          "Poner Camela a todo volumen en la sala de servidores las 24 horas.",
-          "Echarle 3-en-1 a los condensadores para que no chirríen.",
-          "Cambiar todas las contraseñas a lenguaje de signos."
+          "Poner Camela a todo volumen en el rack.",
+          "Echar aceite 3-en-1 a la placa base.",
+          "Poner las claves en lenguaje de signos."
         ]
       },
       {
         id: 36,
-        situation: "Una bomba lógica oculta se activa el viernes a las 15:00 y llena el 100% de los inodos y espacio en disco, impidiendo que el sistema operativo procese pedidos.",
-        bossRant: "¡Alguien ha dejado una bomba de relojería que ha rellenado el disco duro con 80 terabytes de fotos de Nicolas Cage y la tienda online ha petado!",
+        situation: "Una bomba lógica llena el 100% del disco duro el viernes por la tarde, dejando colgado el servidor de pedidos.",
+        bossRant: "¡Han llenado el disco con 80 teras de fotos de Nicolas Cage y la tienda online ha reventado!",
         property: "Disponibilidad",
-        cause: "Agotamiento intencional de recursos de almacenamiento sin cuotas de disco ni monitoreo permanente.",
+        cause: "Agotamiento intencional de almacenamiento sin cuotas de disco ni monitoreo permanente.",
         wrongCauses: [
-          "Interceptación de tráfico Wi-Fi en una cafetería.",
-          "Falsificación de firma digital mediante clave robada.",
-          "Lectura de memoria de kernel mediante Meltdown."
+          "Espionaje de Wi-Fi en una cafetería.",
+          "Falsificación de firma digital.",
+          "Lectura de kernel con Meltdown."
         ],
-        remedy: "Establecer cuotas estrictas de almacenamiento por proceso/usuario, particiones separadas y monitoreo permanente de recursos.",
+        remedy: "Aplicar cuotas de disco por usuario/proceso, separar particiones críticas y monitoreo permanente.",
         wrongRemedies: [
-          "Atrasar el reloj del servidor al jueves para que nunca sea viernes.",
-          "Borrar la carpeta System32 para hacer hueco rápido.",
-          "Comprar un pendrive de 2 GB en el bazar y pegarlo con celo."
+          "Cambiar el calendario para que no sea viernes.",
+          "Borrar System32 para hacer sitio.",
+          "Pegar un pendrive de 2 GB con celo."
         ]
       },
       {
         id: 37,
-        situation: "Un servidor falso suplanta al servidor legítimo de la empresa en la red interna porque las máquinas no verifican la identidad criptográfica del equipo al que se conectan.",
-        bossRant: "¡Un portátil pirata se ha puesto una careta de cartón diciendo 'Soy el Servidor Central' y todos los ordenadores de la oficina le están obedeciendo!",
+        situation: "Un portátil intruso suplanta al servidor central en la red porque los equipos no verifican criptográficamente la identidad del servidor.",
+        bossRant: "¡Un portátil con una careta de cartón dice 'Soy el Servidor' y todos los PCs le obedecen!",
         property: "Autentificación",
-        cause: "Falta de autenticación mutua de dispositivos/objetos mediante certificados digitales o tokens de hardware (TPM).",
+        cause: "Falta de autenticación mutua de máquinas/objetos mediante certificados o chips TPM.",
         wrongCauses: [
-          "Rotura del ventilador del disipador de la CPU.",
-          "Terremoto que desplazó los racks del centro de datos.",
-          "Bit-flip en memoria RAM causado por rayos cósmicos."
+          "Rotura del ventilador de la CPU.",
+          "Terremoto en la sala de racks.",
+          "Bit-flip por radiación solar."
         ],
-        remedy: "Exigir autenticación mutua criptográfica (mTLS / 802.1X) respaldada por certificados almacenados en el chip TPM de cada máquina.",
+        remedy: "Exigir autenticación mutua criptográfica (mTLS / 802.1X) con certificados guardados en el TPM.",
         wrongRemedies: [
-          "Pintarle un bigote con rotulador al servidor de verdad para reconocerlo.",
-          "Preguntarle al servidor por el chat dónde nació la abuela del jefe.",
-          "Subir la tensión de los enchufes a 380 voltios."
+          "Pintarle un bigote al servidor verdadero.",
+          "Preguntarle al servidor por chat quién es.",
+          "Subir los enchufes a 380 voltios."
         ]
       },
       {
         id: 38,
-        situation: "Tras sufrir un incidente grave en el que se alteraron registros contables, el equipo técnico lo arregla en secreto sin avisar a nadie, sin investigar cómo pasó ni anotarlo en la bitácora.",
-        bossRant: "¡Nos han cambiado los libros de cuentas, el informático lo ha tapado con Tipp-Ex digital y aquí no se ha enterado ni el Tato para que no vuelva a pasar!",
+        situation: "Tras descubrir datos contables modificados sin permiso, el técnico lo tapa en secreto sin notificar, investigar ni anotar en la bitácora.",
+        bossRant: "¡Nos cambian las cuentas y el técnico lo tapa con Tipp-Ex sin avisar ni apuntarlo en la bitácora!",
         property: "Integridad",
-        cause: "Incumplimiento de las acciones posteriores a un incidente y falta de trazabilidad en la bitácora para auditoría de modificaciones.",
+        cause: "Incumplimiento de las acciones durante/después de un incidente y falta de registro en bitácora.",
         wrongCauses: [
-          "Falta de ancho de banda en la conexión ADSL.",
-          "Inundación del cuarto de cableado estructurado.",
-          "Sobrecarga térmica de la unidad de coma flotante."
+          "Poca velocidad en el ADSL.",
+          "Inundación en el cuarto de cables.",
+          "Sobrecalentamiento de la FPU."
         ],
-        remedy: "Seguir el protocolo post-incidente: notificar de manera apropiada, determinar cómo ocurrió, ajustar medidas y generar reporte en la bitácora.",
+        remedy: "Protocolo post-incidente: notificar apropiadamente, determinar cómo ocurrió, ajustar medidas y reporte en bitácora.",
         wrongRemedies: [
-          "Darle una palmadita en la espalda al informático por no molestar.",
-          "Prender fuego a la bitácora para que Hacienda no pregunte.",
-          "Desenchufar el monitor cada vez que salga un aviso de error."
+          "Felicitar al técnico por no molestar.",
+          "Quemar la bitácora para que no pregunten.",
+          "Apagar el monitor cuando salga un error."
         ]
       },
       {
         id: 39,
-        situation: "Un atacante inyecta microcódigo fraudulento en el procesador durante una actualización del sistema operativo para alterar cómo funcionan las instrucciones de ensamblador.",
-        bossRant: "¡Le han metido un lavado de cerebro al procesador y ahora cuando le pides que sume 2 + 2 te devuelve 'Patata'!",
+        situation: "Inyectan una actualización de microcódigo falsa en la CPU para alterar cómo funcionan las instrucciones del procesador.",
+        bossRant: "¡Le han lavado el cerebro al procesador y ahora cuando suma 2 + 2 devuelve 'Croqueta'!",
         property: "Autentificación",
-        cause: "El procesador no validó la autenticidad y firma criptográfica del paquete de actualización de microcódigo del fabricante.",
+        cause: "La CPU no verificó la firma digital del fabricante antes de cargar el paquete de microcódigo.",
         wrongCauses: [
-          "Las salidas de emergencia del edificio estaban cerradas con candado.",
-          "El disco duro mecánico tenía el cabezal descalibrado.",
-          "Un corte de fibra óptica dejó sin internet a la oficina."
+          "Salidas de emergencia cerradas con llave.",
+          "Cabezal del disco duro descalibrado.",
+          "Corte de fibra óptica en la calle."
         ],
-        remedy: "Verificar en hardware la firma criptográfica del fabricante antes de aplicar cualquier parche de microcódigo en la CPU.",
+        remedy: "Validar en hardware la firma criptográfica del fabricante antes de aplicar actualizaciones de microcódigo.",
         wrongRemedies: [
-          "Obligar al procesador a repasar los cuadernos Rubio de sumas y restas.",
-          "Quitarle la pila de botón a la placa base durante tres meses.",
-          "Instalar un bloqueador de anuncios en el navegador."
+          "Comprarle cuadernos Rubio al procesador.",
+          "Quitar la pila de la placa tres meses.",
+          "Instalar un bloqueador de anuncios."
         ]
       },
       {
         id: 40,
-        situation: "Un intruso se cuela en la sala de servidores porque la puerta estaba abierta de par en par para que corriera el aire y desconecta todos los cables de red de cuajo.",
-        bossRant: "¡Habéis dejado la puerta del búnker de servidores abierta con una cuña de madera para que corra el fresquito y ha entrado un vándalo a arrancar cables como si fueran espaguetis!",
+        situation: "Dejan la puerta del cuarto de servidores abierta con una cuña para que corra el aire y entra un vándalo a arrancar cables.",
+        bossRant: "¡Dejáis la puerta del búnker abierta para que corra el fresquito y entra un gamberro a arrancar cables!",
         property: "Disponibilidad",
-        cause: "Fallo crítico de seguridad física: no restringir cuidadosamente el acceso al material y equipo informático frente a amenazas humanas (vandalismo).",
+        cause: "Fallo de seguridad física: no restringir cuidadosamente el acceso al equipo frente a vandalismo.",
         wrongCauses: [
-          "Vulnerabilidad de ejecución especulativa en la caché L1.",
-          "Colisión criptográfica en el algoritmo de firma digital.",
-          "Desbordamiento de entero en la calculadora de Windows."
+          "Fallo de ejecución especulativa en caché.",
+          "Colisión en algoritmo de firma.",
+          "Desbordamiento en la calculadora."
         ],
-        remedy: "Restringir cuidadosamente el acceso físico con cerraduras controladas, mantener climatización dedicada y aplicar el plan de contingencia.",
+        remedy: "Restringir cuidadosamente el acceso físico con control de entrada, climatización propia y plan de contingencia.",
         wrongRemedies: [
-          "Untar los cables de red con guindilla picante para que no los toquen.",
-          "Poner un espantapájaros con traje y corbata junto al rack.",
-          "Actualizar Adobe Reader a la última versión."
+          "Untar los cables con guindilla picante.",
+          "Poner un espantapájaros con corbata.",
+          "Actualizar Adobe Reader."
         ]
       }
     ];
 
     // =========================================================================
-    // ESTADO DEL JUEGO
+    // MOTOR DEL JUEGO
     // =========================================================================
     let gameQueue = [];
     let currentIndex = 0;
-    let currentPhase = 1; // 1 = Propiedad/Despido, 2 = Causa, 3 = Remedio
+    let currentPhase = 1;
     let lives = 5;
     let totalFired = 0;
     let isLocked = false;
+    let toastTimer = null;
 
     function shuffleArray(arr) {
       const copy = [...arr];
@@ -1717,6 +1743,7 @@
         Autentificación: 0
       };
 
+      hideToast();
       document.getElementById('startScreen').classList.remove('active');
       document.getElementById('endScreen').classList.remove('active');
       document.getElementById('playScreen').classList.add('active');
@@ -1726,7 +1753,8 @@
     }
 
     function updateHUD() {
-      document.getElementById('caseCounter').textContent = `${Math.min(currentIndex + 1, gameQueue.length)} / ${gameQueue.length}`;
+      const total = gameQueue.length || 40;
+      document.getElementById('caseCounter').textContent = `${Math.min(currentIndex + 1, total)}/${total}`;
       document.getElementById('firedCounter').textContent = totalFired;
       const fullLives = '💼'.repeat(Math.max(0, lives));
       const lostLives = '💀'.repeat(Math.max(0, 5 - lives));
@@ -1746,7 +1774,7 @@
       const count = deptDismissals[deptKey];
       const base = DEPARTMENTS[deptKey].baseName;
       if (count === 0) return base;
-      return `Becario Clon #${count} de ${base.split(' ')[0]}`;
+      return `Becario #${count} de ${base.split(' ')[0]}`;
     }
 
     function loadCurrentSituation() {
@@ -1755,25 +1783,20 @@
       const item = gameQueue[currentIndex];
 
       document.getElementById('bossQuote').textContent = `"${item.bossRant}"`;
-      document.getElementById('incidentNumberTag').textContent = `SITUACIÓN #${currentIndex + 1} DE ${gameQueue.length} (CASO #${item.id})`;
+      document.getElementById('incidentNumberTag').textContent = `CASO #${currentIndex + 1} DE ${gameQueue.length}`;
       document.getElementById('incidentText').textContent = item.situation;
-
-      const fb = document.getElementById('feedbackBox');
-      fb.style.display = 'none';
-      fb.className = 'feedback-box';
 
       updateHUD();
       updateStepIndicators();
       renderPhase1();
     }
 
-    // FASE 1: ELEGIR PROPIEDAD Y DESPEDIR AL ENCARGADO
     function renderPhase1() {
       const area = document.getElementById('interactionArea');
       const deptKeys = ['Confidencialidad', 'Integridad', 'Disponibilidad', 'Autentificación'];
 
       let html = `
-        <div class="phase-title">🥾 FASE 1: ¿Qué departamento ha fallado? ¡Elige a quién ponemos de patitas en la calle!</div>
+        <div class="phase-title">🥾 1. ¿Qué propiedad falló? ¡Despide al encargado!</div>
         <div class="employees-grid">
       `;
 
@@ -1783,10 +1806,12 @@
         const empName = getEmployeeDisplayName(key);
         html += `
           <div class="emp-card" onclick="handlePhase1Choice('${key}')">
-            <div class="emp-avatar">${d.icon}</div>
-            <div class="emp-dept">${d.title}</div>
-            <div class="emp-name">${empName}</div>
-            <div class="emp-excuse">${excuse}</div>
+            <div>
+              <div class="emp-avatar" style="margin: 0 auto 4px auto;">${d.icon}</div>
+              <div class="emp-dept">${d.title}</div>
+              <div class="emp-name">${empName}</div>
+              <div class="emp-excuse">${excuse}</div>
+            </div>
             <div class="fire-badge">🔥 ¡DESPEDIR!</div>
           </div>
         `;
@@ -1798,11 +1823,11 @@
 
     function showFiredStamp(empName, deptTitle) {
       const stamp = document.getElementById('firedStamp');
-      document.getElementById('firedSubtext').textContent = `${empName.toUpperCase()} (${deptTitle.toUpperCase()}) ¡AL INEM!`;
+      document.getElementById('firedSubtext').textContent = `${empName.toUpperCase()} (${deptTitle.toUpperCase()})`;
       stamp.classList.add('show');
       setTimeout(() => {
         stamp.classList.remove('show');
-      }, 1150);
+      }, 1050);
     }
 
     function handlePhase1Choice(chosenDept) {
@@ -1818,21 +1843,19 @@
         updateHUD();
         showFiredStamp(firedName, chosenDept);
 
-        showFeedback(true, `¡DESPIDO PROCEDENTE! Era un fallo de <strong>${item.property}</strong>. Has mandado a <em>${firedName}</em> a la calle y hemos contratado a un becario por medio bocadillo. ¡Ahora averigua la causa!`);
+        showToast(true, `✅ ¡A LA CALLE! Falló <strong>${item.property}</strong>. Ahora elige la causa.`);
 
         setTimeout(() => {
           currentPhase = 2;
           updateStepIndicators();
-          document.getElementById('feedbackBox').style.display = 'none';
           isLocked = false;
           renderPhase2();
-        }, 1500);
+        }, 1250);
       } else {
-        handleMistake(`¡DEMANDA LABORAL! Ese pobre diablo de <strong>${chosenDept}</strong> no tenía la culpa de esto. ¡El sindicato te acaba de quitar 1 vida empresarial! Mira bien qué propiedad está afectada.`);
+        handleMistake(`❌ ¡Demanda laboral! No era <strong>${chosenDept}</strong> (-1 vida 💼).`);
       }
     }
 
-    // FASE 2: ELEGIR LA POSIBLE CAUSA
     function renderPhase2() {
       const item = gameQueue[currentIndex];
       const area = document.getElementById('interactionArea');
@@ -1844,7 +1867,7 @@
 
       const letters = ['A', 'B', 'C', 'D'];
       let html = `
-        <div class="phase-title">🔍 FASE 2: Vale, ya hemos echado al de ${item.property}... ¿Pero cuál ha sido la POSIBLE CAUSA del desastre?</div>
+        <div class="phase-title">🔍 2. ¿Cuál ha sido la POSIBLE CAUSA?</div>
         <div class="options-list">
       `;
 
@@ -1863,25 +1886,22 @@
 
     function handlePhase2Choice(isCorrect) {
       if (isLocked) return;
-      const item = gameQueue[currentIndex];
 
       if (isCorrect) {
         isLocked = true;
         playSound('correct');
-        showFeedback(true, `¡BINGO! Esa era la causa exacta: <strong>${item.cause}</strong>. Ahora falta lo más importante: ¡ponerle un remedio antes de que se entere la prensa!`);
+        showToast(true, `✅ ¡Causa detectada! Ahora elige el remedio.`);
         setTimeout(() => {
           currentPhase = 3;
           updateStepIndicators();
-          document.getElementById('feedbackBox').style.display = 'none';
           isLocked = false;
           renderPhase3();
-        }, 1400);
+        }, 1100);
       } else {
-        handleMistake(`¡PERO QUÉ DICES, MELÓN! Hasta Don Rufino sabe que esa excusa no se la traga ni el auditor. ¡Pierdes 1 vida por diagnóstico chapucero!`);
+        handleMistake(`❌ ¡Diagnóstico chapucero! Esa no es la causa (-1 vida 💼).`);
       }
     }
 
-    // FASE 3: ELEGIR EL REMEDIO
     function renderPhase3() {
       const item = gameQueue[currentIndex];
       const area = document.getElementById('interactionArea');
@@ -1893,7 +1913,7 @@
 
       const letters = ['A', 'B', 'C', 'D'];
       let html = `
-        <div class="phase-title">🛠️ FASE 3: ¿Qué REMEDIO implantamos para que la empresa no sufra otro desastre igual?</div>
+        <div class="phase-title">🛠️ 3. Elige el REMEDIO para salvar la empresa:</div>
         <div class="options-list">
       `;
 
@@ -1912,12 +1932,11 @@
 
     function handlePhase3Choice(isCorrect) {
       if (isLocked) return;
-      const item = gameQueue[currentIndex];
 
       if (isCorrect) {
         isLocked = true;
         playSound('win');
-        showFeedback(true, `¡CHIRINGUITO SALVADO! Remedio aplicado: <strong>${item.remedy}</strong>. ¡Pasamos al siguiente marrón!`);
+        showToast(true, `🎉 ¡Chiringuito salvado! Siguiente caso...`);
 
         setTimeout(() => {
           currentIndex++;
@@ -1926,9 +1945,9 @@
           } else {
             loadCurrentSituation();
           }
-        }, 1500);
+        }, 1200);
       } else {
-        handleMistake(`¡MENUDA CHAPUZA DE REMEDIO! Has empeorado el problema y nos ha caído una multa del INCIBE. ¡Pierdes 1 vida!`);
+        handleMistake(`❌ ¡Menuda chapuza de remedio! Multa del INCIBE (-1 vida 💼).`);
       }
     }
 
@@ -1942,24 +1961,33 @@
       void box.offsetWidth;
       box.classList.add('shake');
 
-      showFeedback(false, msg);
+      showToast(false, msg);
 
       if (lives <= 0) {
         isLocked = true;
         setTimeout(() => {
           endGame(false);
-        }, 1600);
+        }, 1400);
       }
     }
 
-    function showFeedback(isCorrect, htmlMsg) {
-      const fb = document.getElementById('feedbackBox');
-      fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
-      fb.innerHTML = htmlMsg;
-      fb.style.display = 'block';
+    function showToast(isCorrect, htmlMsg) {
+      const toast = document.getElementById('feedbackToast');
+      if (toastTimer) clearTimeout(toastTimer);
+      toast.className = 'feedback-toast show ' + (isCorrect ? 'correct' : 'wrong');
+      toast.innerHTML = htmlMsg;
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('feedbackToast');
+      toast.classList.remove('show');
     }
 
     function endGame(victory) {
+      hideToast();
       document.getElementById('playScreen').classList.remove('active');
       document.getElementById('endScreen').classList.add('active');
 
@@ -1968,22 +1996,21 @@
       const subtitle = document.getElementById('endSubtitle');
 
       if (victory) {
-        stamp.textContent = '¡EMPRESA SALVADA!';
+        stamp.textContent = '¡SALVADOS!';
         stamp.style.color = 'var(--accent-green)';
         stamp.style.borderColor = 'var(--accent-green)';
-        title.textContent = '¡Has sobrevivido a las 40 crisis y CiberChiringuito S.L. sale a Bolsa!';
-        subtitle.textContent = 'Has despedido a 40 encargados, has clavado la confidencialidad, integridad, disponibilidad y autentificación, y Don Rufino se ha comprado un yate en Marbella a tu salud.';
+        title.textContent = '¡Superaste las 40 crisis y salimos a Bolsa!';
+        subtitle.textContent = 'Has despedido a 40 encargados, dominas el Tema 1 al 100% y Don Rufino se ha comprado un yate.';
       } else {
-        stamp.textContent = '¡QUIEBRA TOTAL!';
+        stamp.textContent = '¡QUIEBRA!';
         stamp.style.color = 'var(--accent-red)';
         stamp.style.borderColor = 'var(--accent-red)';
-        title.textContent = '¡Te has quedado sin vidas y han precintado CiberChiringuito S.L.!';
-        subtitle.textContent = 'Entre las indemnizaciones por despido improcedente y los jáqueres rusos, Don Rufino ha tenido que fugarse en patinete eléctrico.';
+        title.textContent = '¡Sin vidas! Han precintado CiberChiringuito S.L.';
+        subtitle.textContent = 'Entre indemnizaciones y jáqueres, Don Rufino se ha fugado en patinete eléctrico.';
       }
 
-      document.getElementById('endCases').textContent = `${currentIndex} / ${gameQueue.length}`;
+      document.getElementById('endCases').textContent = `${currentIndex}/${gameQueue.length}`;
       document.getElementById('endFired').textContent = totalFired;
-      document.getElementById('endLives').textContent = lives;
     }
   </script>
 </body>
